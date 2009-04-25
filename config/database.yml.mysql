@@ -1,0 +1,6 @@
+production:
+  adapter: mysql
+  database: grandura_cms
+  username: cms
+  password: cmsadmin
+  host: localhost

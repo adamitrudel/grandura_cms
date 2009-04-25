@@ -1,0 +1,11 @@
+.DS_Store
+db/*.sqlite3
+*.sql
+log/*
+tmp/*
+public/system
+cache/*
+.svn
+._*
+.htaccess
+Thumbs.db

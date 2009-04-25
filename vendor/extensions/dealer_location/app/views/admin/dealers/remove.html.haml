@@ -1,0 +1,13 @@
+%h1 Remove Link
+
+%p 
+  Are you sure you want to
+  %strong.warning permanently remove</strong>
+  = @dealer.company
+  Dealer?
+
+- form_for [:admin, @dealer], :html => {:method => :delete} do |f|
+  %p.buttons
+    = f.submit "Delete Dealer"
+    or
+    = link_to 'Cancel', admin_dealers_url

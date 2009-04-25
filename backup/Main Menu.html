@@ -1,0 +1,10 @@
+<div id="mainmenu">
+  <a href="/windows">windows</a> |
+  <a href="/siding">siding</a> |
+  <a href="/gallery">gallery</a> |
+  <a href="/contact-us">contact us</a>
+</div>
+
+<script language="javascript">
+  $("#mainmenu a[href=" + location.pathname.split("/")[1].toLowerCase() + "]").addClass("here");
+</script>

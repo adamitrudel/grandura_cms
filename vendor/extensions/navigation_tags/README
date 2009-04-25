@@ -1,0 +1,44 @@
+= Navigation Tags
+
+Provides hierarchical tree navigation based on Radiant's site structure. Outputs navigation in the form of a -very flexible and CSS'able- unordered list. Also provides r:if_self and r:if_ancestor_or_self
+
+== Usage
+
+  <r:nav [root="/"] [include_root="true"] [depth="2"] [expand_all="true"] [ids_for_lis="true"] />
+
+  Given this directory tree: 
+
+   * Home
+   ** About
+   *** Contact us
+   ** Blog
+   *** First Article
+   *** Second Article
+   ** Catalog
+
+  <r:nav /> would output a navigation list like: 
+
+  <ul>
+    <li class="parent_of_current has_children"><a href="/about/">About</a>
+      <ul>
+        <li class="current"><a href="/about/contact">Contact Us</a></li>
+      </ul>
+    </li>
+    <li class="has_children"><a href="/blog/">Blog</a></li>
+    <li class="has_children"><a href="/catalogue">Catalogue</a></li>
+  </ul>
+
+  == Available tag attributes:
+
+  * ids_for_lis: 	defaults to false, 			enable this to give each li an id (it's slug)
+  * root: 		defaults to "/", 	          which page to start building the navigation from
+  * include_root: defaults to false, 		  set to true to include the root page (i.e. Home)
+  * depth: 		defaults to 2,				      which will print out the first two levels of pages.
+  * expand_all: 	defaults to false, 			enable this to have all li's create sub-ul's of their children, i.o. only the currently active li
+  * id, class, monkeyballs, ... 	        will be used as html attributes for the ul
+
+= CREDITS
+
+* Ryan Heneise
+* Marty Haught
+* Benny Degezelle

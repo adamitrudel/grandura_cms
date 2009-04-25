@@ -1,0 +1,38 @@
+- session[:back_to_dealer] = request.url
+
+- form_for [:admin, @dealer] do |f|
+  %p
+    %label{ :for => "dealer_location"} Location
+    %br
+    = f.select :location_id, Location.all.map{ |l| [l.name, l.id] }, { :prompt => "- Please select a location -" }
+    Or
+    = link_to "Add / Remove locations", admin_locations_path
+  %p
+    %label{ :for => "dealer_company" } Company
+    %br
+    = f.text_field :company
+  %p
+    %label{ :for => "dealer_contact_person" } Contact Person
+    %br
+    = f.text_field :contact_person
+  %p
+    %label{ :for => "dealer_phone" } Phone
+    %br
+    = f.text_field :phone    
+  %p
+    %label{ :for => "dealer_address" } Address
+    %br
+    = f.text_area :address, :rows => 3
+
+  %h3 Available Products
+  = f.check_box :windows
+  %label{ :for => "dealer_windows" } Windows
+  %br
+  = f.check_box :siding
+  %label{ :for => "dealer_siding" } Siding
+
+  %p.buttons
+    = save_model_button(@dealer)
+    = save_model_and_continue_editing_button(@dealer)
+    or 
+    = link_to "Cancel", {:action => :index}

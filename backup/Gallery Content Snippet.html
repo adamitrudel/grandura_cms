@@ -1,0 +1,27 @@
+<r:title />
+<r:gallery:unless_galleries>
+  <!-- items -->
+  <r:gallery:item:unless_current>
+    <r:gallery:if_items>
+    <table cellspacing="0" cellpadding="0" border="0">
+      <tr>
+        <r:gallery:items:each>
+          <!-- item -->
+          <td>
+            <a href="<r:gallery:item:thumb width="450" prefix="large" />" rel="lightbox[<r:gallery:name />]" title="<r:gallery:item:upcase_name />: <r:gallery:item:description />">
+            <div class="img-t"><img width="129" height="99" src="<r:gallery:item:thumb width="150" prefix="small" />"/></div>
+            <div class="txt-t"><r:gallery:item:short_name/></div>
+            </a>
+          </td>
+          <r:gallery:item:if_mod_4>
+            </tr>
+            <tr>
+          </r:gallery:item:if_mod_4>
+          <!-- end item -->
+        </r:gallery:items:each>
+      </tr>
+    </table>
+    </r:gallery:if_items>
+  </r:gallery:item:unless_current>
+  <!-- end items -->
+</r:gallery:unless_galleries>

@@ -1,0 +1,26 @@
+<div id="sidemenu">
+  <div class="menu-level-1" name="windows">
+    <div class="menu-level-2" name="overview">
+      <span>OVERVIEW</span>
+      <ul>
+        <li><a href="/windows/overview/vinyl-benefits">Vinyl Benefits</a></li>
+        <li><a href="/windows/overview/premium-features">Premium Features</a></li>
+        <li><a href="/windows/overview/glass">Glass</a></li>
+        <li><a href="/windows/overview/warranty">Warranty</a></li>
+        <li><a href="/windows/overview/energy-savings-calculator">Energy Savings Calculator</a></li>
+      </ul>
+    </div>
+  <a href="/windows/specifications">SPECIFICATIONS</a><br />
+  <a href="/windows/options-and-accessories">OPTIONS &amp; ACCESSORIES</a><br />
+  <a href="/windows/literature">LITERATURE</a>
+  </div>
+</div>
+
+<script language="javascript">
+  var parts = location.pathname.toLowerCase().split("/");
+  $("#sidemenu .menu-level-1").hide();
+  var l1 = $("#sidemenu .menu-level-1[name$=" + parts[1] + "]");
+  l1.show().addClass("here");
+
+  $("a[href$=" + parts[3] + "]", l1).addClass("here");
+</script>

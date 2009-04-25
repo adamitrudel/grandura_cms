@@ -1,0 +1,586 @@
+-- MySQL dump 10.11
+--
+-- Host: localhost    Database: grandura_cms
+-- ------------------------------------------------------
+-- Server version	5.0.67-community
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `banner_placements`
+--
+
+DROP TABLE IF EXISTS `banner_placements`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `banner_placements` (
+  `id` int(11) NOT NULL auto_increment,
+  `banner_id` int(11) default NULL,
+  `page_id` int(11) default NULL,
+  `weight` int(11) default '1',
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `page_id_on_banner_id` (`page_id`,`banner_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `banner_placements`
+--
+
+LOCK TABLES `banner_placements` WRITE;
+/*!40000 ALTER TABLE `banner_placements` DISABLE KEYS */;
+INSERT INTO `banner_placements` VALUES (1,1,1,1,'2009-03-26 03:47:07','2009-03-26 03:47:07');
+/*!40000 ALTER TABLE `banner_placements` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `banners`
+--
+
+DROP TABLE IF EXISTS `banners`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `banners` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `background_image` varchar(255) default NULL,
+  `foreground_image` varchar(255) default NULL,
+  `link_url` varchar(255) default NULL,
+  `link_target` varchar(255) default NULL,
+  `image_style` varchar(255) default NULL,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `banners`
+--
+
+LOCK TABLES `banners` WRITE;
+/*!40000 ALTER TABLE `banners` DISABLE KEYS */;
+INSERT INTO `banners` VALUES (1,'Main Banner','/images/admin/bodybg.gif','/images/admin/header.gif','/','','','2009-03-26 03:47:07','2009-03-26 03:47:07');
+/*!40000 ALTER TABLE `banners` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `config`
+--
+
+DROP TABLE IF EXISTS `config`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `config` (
+  `id` int(11) NOT NULL auto_increment,
+  `key` varchar(40) NOT NULL default '',
+  `value` varchar(255) default '',
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `key` (`key`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `config`
+--
+
+LOCK TABLES `config` WRITE;
+/*!40000 ALTER TABLE `config` DISABLE KEYS */;
+INSERT INTO `config` VALUES (1,'admin.title','Radiant CMS'),(2,'admin.subtitle','Publishing for Small Teams'),(3,'defaults.page.parts','body, extended'),(4,'defaults.page.status','draft'),(5,'defaults.page.filter',''),(6,'session_timeout','1209600'),(7,'gallery.default_thumbnails','small=150x,admin_preview=500x500,admin_thumb=300x300,large=450x'),(8,'gallery.path_prefix','public/galleries'),(9,'gallery.processor','rmagick'),(10,'gallery.gallery_based','false'),(11,'galleries.path','galleries');
+/*!40000 ALTER TABLE `config` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `dealers`
+--
+
+DROP TABLE IF EXISTS `dealers`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `dealers` (
+  `id` int(11) NOT NULL auto_increment,
+  `company` varchar(255) default NULL,
+  `contact_person` varchar(255) default NULL,
+  `phone` varchar(255) default NULL,
+  `address` varchar(255) default NULL,
+  `windows` tinyint(1) default NULL,
+  `siding` tinyint(1) default NULL,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  `location_id` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `dealers`
+--
+
+LOCK TABLES `dealers` WRITE;
+/*!40000 ALTER TABLE `dealers` DISABLE KEYS */;
+INSERT INTO `dealers` VALUES (3,'All Windows Inc.','John Doe','518-489-5581','15 Kairnes Street, Albany, NY 12205',0,1,'2009-04-01 07:33:13','2009-04-02 04:36:07',2),(4,'Siding Co., Inc.','Jim Young','716-852-2531','266 Broadway Street, Buffalo, NY 14204 ',1,1,'2009-04-01 07:33:13','2009-04-02 04:35:51',2);
+/*!40000 ALTER TABLE `dealers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `extension_meta`
+--
+
+DROP TABLE IF EXISTS `extension_meta`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `extension_meta` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `schema_version` int(11) default '0',
+  `enabled` tinyint(1) default '1',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `extension_meta`
+--
+
+LOCK TABLES `extension_meta` WRITE;
+/*!40000 ALTER TABLE `extension_meta` DISABLE KEYS */;
+/*!40000 ALTER TABLE `extension_meta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `galleries`
+--
+
+DROP TABLE IF EXISTS `galleries`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `galleries` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `slug` varchar(255) default NULL,
+  `path` varchar(255) default NULL,
+  `description` text,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  `hidden` tinyint(1) NOT NULL default '0',
+  `parent_id` int(11) default NULL,
+  `external` tinyint(1) default '0',
+  `children_count` int(11) NOT NULL default '0',
+  `created_by` int(11) default NULL,
+  `updated_by` int(11) default NULL,
+  `position` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `galleries`
+--
+
+LOCK TABLES `galleries` WRITE;
+/*!40000 ALTER TABLE `galleries` DISABLE KEYS */;
+INSERT INTO `galleries` VALUES (2,'Windows','windows','galleries/2','','2009-03-26 12:15:03','2009-03-26 12:15:03',0,NULL,0,0,NULL,NULL,NULL),(3,'Siding','siding','galleries/3','','2009-03-26 12:15:11','2009-03-26 12:15:11',0,NULL,0,0,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `galleries` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `gallery_importings`
+--
+
+DROP TABLE IF EXISTS `gallery_importings`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `gallery_importings` (
+  `id` int(11) NOT NULL auto_increment,
+  `gallery_id` int(11) default NULL,
+  `path` varchar(255) default NULL,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `gallery_importings`
+--
+
+LOCK TABLES `gallery_importings` WRITE;
+/*!40000 ALTER TABLE `gallery_importings` DISABLE KEYS */;
+/*!40000 ALTER TABLE `gallery_importings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `gallery_item_infos`
+--
+
+DROP TABLE IF EXISTS `gallery_item_infos`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `gallery_item_infos` (
+  `id` int(11) NOT NULL auto_increment,
+  `gallery_item_id` int(11) default NULL,
+  `name` varchar(255) default NULL,
+  `value_string` varchar(255) default NULL,
+  `value_text` text,
+  `value_integer` int(11) default NULL,
+  `value_datetime` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `gallery_item_infos`
+--
+
+LOCK TABLES `gallery_item_infos` WRITE;
+/*!40000 ALTER TABLE `gallery_item_infos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `gallery_item_infos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `gallery_items`
+--
+
+DROP TABLE IF EXISTS `gallery_items`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `gallery_items` (
+  `id` int(11) NOT NULL auto_increment,
+  `filename` varchar(255) default NULL,
+  `content_type` varchar(255) default NULL,
+  `description` text,
+  `gallery_id` int(11) default NULL,
+  `position` int(11) default NULL,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  `name` varchar(255) default NULL,
+  `extension` varchar(255) default NULL,
+  `size` int(11) default NULL,
+  `height` int(11) default NULL,
+  `width` int(11) default NULL,
+  `parent_id` int(11) default NULL,
+  `thumbnail` varchar(255) default NULL,
+  `created_by` int(11) default NULL,
+  `updated_by` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `gallery_items`
+--
+
+LOCK TABLES `gallery_items` WRITE;
+/*!40000 ALTER TABLE `gallery_items` DISABLE KEYS */;
+INSERT INTO `gallery_items` VALUES (35,'Block_Blur_Glass_Windows.jpg','image/jpeg',NULL,2,1,'2009-04-02 06:13:00','2009-04-02 06:13:00','Block_Blur_Glass_Windows','jpg',25761,396,396,NULL,NULL,NULL,NULL),(36,'Block_Blur_Glass_Windows_small_150x150.jpg','image/jpeg',NULL,2,NULL,'2009-04-02 06:13:00','2009-04-02 06:13:00',NULL,NULL,25761,150,150,35,'small_150x150',NULL,NULL),(37,'Block_Blur_Glass_Windows_admin_preview_499x499.jpg','image/jpeg',NULL,2,NULL,'2009-04-02 06:13:00','2009-04-02 06:13:00',NULL,NULL,25761,499,499,35,'admin_preview_499x499',NULL,NULL),(38,'Block_Blur_Glass_Windows_admin_thumb_300x300.jpg','image/jpeg',NULL,2,NULL,'2009-04-02 06:13:00','2009-04-02 06:13:00',NULL,NULL,25761,300,300,35,'admin_thumb_300x300',NULL,NULL),(39,'Block_Blur_Glass_Windows_large_396x396.jpg','image/jpeg',NULL,2,NULL,'2009-04-02 06:13:00','2009-04-02 06:13:00',NULL,NULL,25761,396,396,35,'large_396x396',NULL,NULL),(40,'Flat_Windows.jpg','image/jpeg',NULL,2,2,'2009-04-02 06:13:27','2009-04-02 06:13:27','Flat_Windows','jpg',95575,356,476,NULL,NULL,NULL,NULL),(41,'Flat_Windows_small_150x112.jpg','image/jpeg',NULL,2,NULL,'2009-04-02 06:13:28','2009-04-02 06:13:28',NULL,NULL,95575,112,150,40,'small_150x112',NULL,NULL),(42,'Flat_Windows_admin_preview_500x373.jpg','image/jpeg',NULL,2,NULL,'2009-04-02 06:13:29','2009-04-02 06:13:29',NULL,NULL,95575,373,500,40,'admin_preview_500x373',NULL,NULL),(43,'Flat_Windows_admin_thumb_300x224.jpg','image/jpeg',NULL,2,NULL,'2009-04-02 06:13:30','2009-04-02 06:13:30',NULL,NULL,95575,224,300,40,'admin_thumb_300x224',NULL,NULL),(44,'Flat_Windows_large_450x336.jpg','image/jpeg',NULL,2,NULL,'2009-04-02 06:13:31','2009-04-02 06:13:31',NULL,NULL,95575,336,450,40,'large_450x336',NULL,NULL),(45,'Grid_Windows.jpg','image/jpeg',NULL,2,3,'2009-04-02 06:14:07','2009-04-02 06:14:07','Grid_Windows','jpg',43122,226,260,NULL,NULL,NULL,NULL),(46,'Grid_Windows_small_150x130.jpg','image/jpeg',NULL,2,NULL,'2009-04-02 06:14:07','2009-04-02 06:14:07',NULL,NULL,43122,130,150,45,'small_150x130',NULL,NULL),(47,'Grid_Windows_admin_preview_500x434.jpg','image/jpeg',NULL,2,NULL,'2009-04-02 06:14:07','2009-04-02 06:14:07',NULL,NULL,43122,434,500,45,'admin_preview_500x434',NULL,NULL),(48,'Grid_Windows_admin_thumb_300x260.jpg','image/jpeg',NULL,2,NULL,'2009-04-02 06:14:07','2009-04-02 06:14:07',NULL,NULL,43122,260,300,45,'admin_thumb_300x260',NULL,NULL),(49,'Grid_Windows_large_260x226.jpg','image/jpeg',NULL,2,NULL,'2009-04-02 06:14:07','2009-04-02 06:14:07',NULL,NULL,43122,226,260,45,'large_260x226',NULL,NULL),(50,'Interiors_Stained_Glass_Windows.jpg','image/jpeg',NULL,2,4,'2009-04-02 06:14:25','2009-04-02 06:14:25','Interiors_Stained_Glass_Windows','jpg',191455,492,395,NULL,NULL,NULL,NULL),(51,'Interiors_Stained_Glass_Windows_small_150x186.jpg','image/jpeg',NULL,2,NULL,'2009-04-02 06:14:25','2009-04-02 06:14:25',NULL,NULL,191455,186,150,50,'small_150x186',NULL,NULL),(52,'Interiors_Stained_Glass_Windows_admin_preview_401x500.jpg','image/jpeg',NULL,2,NULL,'2009-04-02 06:14:25','2009-04-02 06:14:25',NULL,NULL,191455,500,401,50,'admin_preview_401x500',NULL,NULL),(53,'Interiors_Stained_Glass_Windows_admin_thumb_240x300.jpg','image/jpeg',NULL,2,NULL,'2009-04-02 06:14:26','2009-04-02 06:14:26',NULL,NULL,191455,300,240,50,'admin_thumb_240x300',NULL,NULL),(54,'Interiors_Stained_Glass_Windows_large_395x492.jpg','image/jpeg',NULL,2,NULL,'2009-04-02 06:14:26','2009-04-02 06:14:26',NULL,NULL,191455,492,395,50,'large_395x492',NULL,NULL),(55,'Tespa_Window.jpg','image/jpeg',NULL,2,5,'2009-04-02 06:14:42','2009-04-02 06:14:42','Tespa_Window','jpg',53702,634,830,NULL,NULL,NULL,NULL),(56,'Tespa_Window_small_150x114.jpg','image/jpeg',NULL,2,NULL,'2009-04-02 06:14:43','2009-04-02 06:14:43',NULL,NULL,53702,114,150,55,'small_150x114',NULL,NULL),(57,'Tespa_Window_admin_preview_500x381.jpg','image/jpeg',NULL,2,NULL,'2009-04-02 06:14:43','2009-04-02 06:14:43',NULL,NULL,53702,381,500,55,'admin_preview_500x381',NULL,NULL),(58,'Tespa_Window_admin_thumb_300x229.jpg','image/jpeg',NULL,2,NULL,'2009-04-02 06:14:43','2009-04-02 06:14:43',NULL,NULL,53702,229,300,55,'admin_thumb_300x229',NULL,NULL),(59,'Tespa_Window_large_450x343.jpg','image/jpeg',NULL,2,NULL,'2009-04-02 06:14:43','2009-04-02 06:14:43',NULL,NULL,53702,343,450,55,'large_450x343',NULL,NULL);
+/*!40000 ALTER TABLE `gallery_items` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `layouts`
+--
+
+DROP TABLE IF EXISTS `layouts`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `layouts` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(100) default NULL,
+  `content` text,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  `created_by_id` int(11) default NULL,
+  `updated_by_id` int(11) default NULL,
+  `content_type` varchar(40) default NULL,
+  `lock_version` int(11) default '0',
+  `layout_file` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `layouts`
+--
+
+LOCK TABLES `layouts` WRITE;
+/*!40000 ALTER TABLE `layouts` DISABLE KEYS */;
+INSERT INTO `layouts` VALUES (1,'Gallery','<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n\r\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n  <link href=\"/stylesheets/frame.css\" rel=\"stylesheet\" type=\"text/css\" />\r\n  <Title>Grandura | For the way you live</Title>\r\n  <META HTTP-EQUIV=\"Content-Type\" content=\"text/html; charset=utf-8\" />\r\n  <META NAME=\"keywords\" CONTENT=\"\">\r\n  <META NAME=\"description\" CONTENT=\"\">\r\n  <META HTTP-equiv=\"Pragma\" CONTENT=\"no-cache\">\r\n  <META NAME=\"Distribution\" CONTENT=\"global\">\r\n  <META NAME=\"Rating\" CONTENT=\"general\">\r\n  <META HTTP-EQUIV=\"Content-Language\" CONTENT=\"FR-CA\">\r\n  <META NAME=\"revisit-after\" CONTENT=\"5 days\">\r\n  <META NAME=\"robots\" CONTENT=\"ALL\">\r\n  <META NAME=\"author\" CONTENT=\"Emsolutions - http://www.emsolutions.ca\">\r\n  <META NAME=\"copyright\" CONTENT=\"Emsolutions - Copyright Â© 2008\">\r\n  <META NAME=\"Publisher\" CONTENT=\"Emsolutions\">\r\n  <script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js\"></script>\r\n  <r:gallery:lightbox_stuff />\r\n  <r:snippet name=\"gallery-css\" />\r\n</head>\r\n\r\n<body>\r\n  <div id=\"container\">	\r\n    <div id=\"topmenu\"><strong><a href=\"/\">Home</a></strong> | <strong><a href=\"/site-map\">Site Map</a></strong</div>\r\n    <r:snippet name=\"main-menu\" />\r\n    <div id=\"content\">\r\n      <table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n        <tr>\r\n          <td width=\"400\" valign=\"top\">\r\n          	<div id=\"col-left\">\r\n              <r:snippet name=\"side-menu\" />\r\n            </div>\r\n            <div id=\"bigbutton\">\r\n            	<p class=\"bigButton\"><a href=\"#\">Where to Find Our Products</a></p>\r\n			        <p class=\"bigButton\"><a href=\"#\">Calculate Energy Savings</a></p>\r\n            	<p class=\"bigButton\"><a href=\"#\">Download Brochures</a></p>\r\n            	<p class=\"bigButton\"><a href=\"#\">View Photo Gallery</a></p>\r\n            </div>            \r\n          </td>\r\n          <td valign=\"top\">\r\n            <r:snippet name=\"gallery-content\" />\r\n          </td>\r\n        </tr>\r\n      </table>\r\n    </div>    \r\n    <div class=\"clearFloat\"></div>\r\n  </div>\r\n  <div id=\"footer\"><r:snippet name=\"footer\" /></div>\r\n</body>\r\n</html>','2009-03-25 09:39:34','2009-04-02 03:42:56',NULL,1,'text/html',10,''),(2,'Normal','<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n\r\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n  <link href=\"/stylesheets/frame.css\" rel=\"stylesheet\" type=\"text/css\" />\r\n<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js\"></script>\r\n  <Title>Grandura | For the way you live</Title>\r\n  <META HTTP-EQUIV=\"Content-Type\" content=\"text/html; charset=utf-8\" />\r\n  <META NAME=\"keywords\" CONTENT=\"\">\r\n  <META NAME=\"description\" CONTENT=\"\">\r\n  <META HTTP-equiv=\"Pragma\" CONTENT=\"no-cache\">\r\n  <META NAME=\"Distribution\" CONTENT=\"global\">\r\n  <META NAME=\"Rating\" CONTENT=\"general\">\r\n  <META HTTP-EQUIV=\"Content-Language\" CONTENT=\"FR-CA\">\r\n  <META NAME=\"revisit-after\" CONTENT=\"5 days\">\r\n  <META NAME=\"robots\" CONTENT=\"ALL\">\r\n  <META NAME=\"author\" CONTENT=\"Emsolutions - http://www.emsolutions.ca\">\r\n  <META NAME=\"copyright\" CONTENT=\"Emsolutions - Copyright Â© 2008\">\r\n  <META NAME=\"Publisher\" CONTENT=\"Emsolutions\">\r\n</head>\r\n\r\n<body>\r\n  <div id=\"container\">	\r\n    <div id=\"topmenu\"><strong><a href=\"/\">Home</a></strong> | <strong><a href=\"/site-map\">Site Map</a></strong</div>\r\n    <r:snippet name=\"main-menu\" />\r\n    <div id=\"content\">\r\n      <table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n        <tr>\r\n          <td width=\"400\" valign=\"top\">\r\n          	<div id=\"col-left\">\r\n                    <r:snippet name=\"side-menu\" />\r\n                </div>\r\n            \r\n              <div id=\"bigbutton\">\r\n              	<p class=\"bigButton\"><a href=\"http://granduraliving.com:3333/contact-us\">Where to Find Our Products</a></p>\r\n				<p class=\"bigButton\"><a href=\"http://granduraliving.com:3333/windows/overview/energy-savings-calculator/\">Calculate Energy Savings</a></p>\r\n              	<p class=\"bigButton\"><a href=\"http://granduraliving.com:3333/windows/literature/brochures/\">Download Brochures</a></p>\r\n              	<p class=\"bigButton\"><a href=\"http://granduraliving.com:3333/gallery/glamour/windows/\">View Photo Gallery</a></p>\r\n              </div>            \r\n          </td>\r\n          <td valign=\"top\">\r\n            <r:content />            \r\n          </td>\r\n        </tr>\r\n      </table>\r\n    </div>    \r\n    <div class=\"clearFloat\"></div>\r\n  </div>\r\n  <div id=\"footer\"><r:snippet name=\"footer\" /></div>\r\n</body>\r\n\r\n</html>','2009-03-26 03:48:36','2009-04-06 19:04:32',1,2,'',17,''),(3,'Home Page','<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n\r\n<head>\r\n\r\n<script src=\"scripts/dreamweaver.js\" language=\"javascript\"></script>\r\n<script src=\"scripts/swfobject_modified.js\" type=\"text/javascript\"></script>\r\n<link href=\"/stylesheets/frame.css\" rel=\"stylesheet\" type=\"text/css\" />\r\n<!--[if lt IE 8]><script src=\"http://ie7-js.googlecode.com/svn/version/2.0(beta3)/IE8.js\" type=\"text/javascript\"></script><![endif]-->\r\n\r\n<Title>Grandura | For the way you live</Title>\r\n<META HTTP-EQUIV=\"Content-Type\" content=\"text/html; charset=utf-8\" />\r\n<META NAME=\"keywords\" CONTENT=\"\">\r\n<META NAME=\"description\" CONTENT=\"\">\r\n<META HTTP-equiv=\"Pragma\" CONTENT=\"no-cache\">\r\n<META NAME=\"Distribution\" CONTENT=\"global\">\r\n<META NAME=\"Rating\" CONTENT=\"general\">\r\n<META HTTP-EQUIV=\"Content-Language\" CONTENT=\"FR-CA\">\r\n<META NAME=\"revisit-after\" CONTENT=\"5 days\">\r\n<META NAME=\"robots\" CONTENT=\"ALL\">\r\n<META NAME=\"author\" CONTENT=\"Emsolutions - http://www.emsolutions.ca\">\r\n<META NAME=\"copyright\" CONTENT=\"Emsolutions - Copyright Â© 2008\">\r\n<META NAME=\"Publisher\" CONTENT=\"Emsolutions\">\r\n\r\n</head>\r\n\r\n<body style=\"background-image:url(/images/bodybg_home.gif)\">\r\n\r\n  <div id=\"container\">	\r\n    <div id=\"topmenu\">\r\n      <strong><a href=\"/\">Home</a></strong> | <strong><a href=\"/site-map\">Site Map</a></strong>\r\n    </div>\r\n    <r:snippet name=\"main-menu\" />\r\n    <div id=\"content\">\r\n      <r:content />\r\n    </div>\r\n    <div id=\"footerhome\">\r\n      <r:snippet name=\"footer\" />\r\n    </div>   \r\n    <div class=\"clearFloat\"></div>\r\n  </div>\r\n</body>\r\n</html>','2009-03-31 15:43:43','2009-04-02 04:53:01',2,1,'',7,''),(4,'Contact Us','<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n\r\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n  <link href=\"/stylesheets/frame.css\" rel=\"stylesheet\" type=\"text/css\" />\r\n<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js\"></script>\r\n  <Title>Grandura | For the way you live</Title>\r\n  <META HTTP-EQUIV=\"Content-Type\" content=\"text/html; charset=utf-8\" />\r\n  <META NAME=\"keywords\" CONTENT=\"\">\r\n  <META NAME=\"description\" CONTENT=\"\">\r\n  <META HTTP-equiv=\"Pragma\" CONTENT=\"no-cache\">\r\n  <META NAME=\"Distribution\" CONTENT=\"global\">\r\n  <META NAME=\"Rating\" CONTENT=\"general\">\r\n  <META HTTP-EQUIV=\"Content-Language\" CONTENT=\"FR-CA\">\r\n  <META NAME=\"revisit-after\" CONTENT=\"5 days\">\r\n  <META NAME=\"robots\" CONTENT=\"ALL\">\r\n  <META NAME=\"author\" CONTENT=\"Emsolutions - http://www.emsolutions.ca\">\r\n  <META NAME=\"copyright\" CONTENT=\"Emsolutions - Copyright Â© 2008\">\r\n  <META NAME=\"Publisher\" CONTENT=\"Emsolutions\">\r\n</head>\r\n\r\n<body>\r\n  <div id=\"container\">	\r\n    <div id=\"topmenu\"><strong><a href=\"/\">Home</a></strong> | <strong><a href=\"/site-map\">Site Map</a></strong</div>\r\n    <r:snippet name=\"main-menu\" />\r\n    <div id=\"content\">\r\n      <table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n        <tr>\r\n          <td width=\"400\" valign=\"top\">\r\n          	<div id=\"col-left\">\r\n                    <r:snippet name=\"contact-us-form\" />\r\n                </div>\r\n          </td>\r\n          <td valign=\"top\">\r\n            <r:content />            \r\n          </td>\r\n        </tr>\r\n      </table>\r\n    </div>    \r\n    <div class=\"clearFloat\"></div>\r\n  </div>\r\n  <div id=\"footer\"><r:snippet name=\"footer\" /></div>\r\n</body>\r\n</html>','2009-04-02 03:31:43','2009-04-02 03:42:36',1,1,'',2,'');
+/*!40000 ALTER TABLE `layouts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `locations`
+--
+
+DROP TABLE IF EXISTS `locations`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `locations` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `locations`
+--
+
+LOCK TABLES `locations` WRITE;
+/*!40000 ALTER TABLE `locations` DISABLE KEYS */;
+INSERT INTO `locations` VALUES (2,'New York'),(3,'Vermont'),(5,'Alabamaha');
+/*!40000 ALTER TABLE `locations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `page_attachments`
+--
+
+DROP TABLE IF EXISTS `page_attachments`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `page_attachments` (
+  `id` int(11) NOT NULL auto_increment,
+  `content_type` varchar(255) default NULL,
+  `filename` varchar(255) default NULL,
+  `size` int(11) default NULL,
+  `parent_id` int(11) default NULL,
+  `thumbnail` varchar(255) default NULL,
+  `width` int(11) default NULL,
+  `height` int(11) default NULL,
+  `created_at` datetime default NULL,
+  `created_by` int(11) default NULL,
+  `updated_at` datetime default NULL,
+  `updated_by` int(11) default NULL,
+  `page_id` int(11) default NULL,
+  `title` varchar(255) default NULL,
+  `description` varchar(255) default NULL,
+  `position` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `page_attachments`
+--
+
+LOCK TABLES `page_attachments` WRITE;
+/*!40000 ALTER TABLE `page_attachments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `page_attachments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `page_parts`
+--
+
+DROP TABLE IF EXISTS `page_parts`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `page_parts` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(100) default NULL,
+  `filter_id` varchar(25) default NULL,
+  `content` text,
+  `page_id` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `parts_by_page` (`page_id`,`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=518 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `page_parts`
+--
+
+LOCK TABLES `page_parts` WRITE;
+/*!40000 ALTER TABLE `page_parts` DISABLE KEYS */;
+INSERT INTO `page_parts` VALUES (21,'body','','',5),(22,'extended','','',5),(125,'body','','',32),(126,'extended','','',32),(137,'body','','',38),(138,'extended','','',38),(139,'body','Fckeditor','',39),(140,'extended','','',39),(141,'body','Fckeditor','',40),(142,'extended','','',40),(147,'body','','',42),(148,'extended','','',42),(149,'body','Fckeditor','',43),(150,'extended','','',43),(151,'body','Fckeditor','',44),(152,'extended','','',44),(153,'body','Fckeditor','',45),(154,'extended','','',45),(157,'body','Fckeditor','',46),(158,'extended','','',46),(161,'body','Fckeditor','',47),(162,'extended','','',47),(163,'body','Fckeditor','',48),(164,'extended','','',48),(167,'body','Fckeditor','',49),(168,'extended','','',49),(173,'body','Fckeditor','',51),(174,'extended','','',51),(177,'body','Fckeditor','',52),(178,'extended','','',52),(255,'body','',' <r:gallery id=\"2\">\r\n    <ul>\r\n      <r:gallery:items:each by=\"position\" sort=\"asc\">\r\n        <li><r:gallery:item:path /></li>\r\n      </r:gallery:items:each>\r\n    </ul>\r\n  </r:gallery>\r\n',50),(256,'extended','','',50),(257,'body','','Gallery',6),(258,'extended','','',6),(303,'body','Fckeditor','',41),(304,'extended','','',41),(321,'body','Fckeditor','<p><img width=\"581\" height=\"192\" alt=\"\" src=\"/images/photo_home.jpg\" /></p>\r\n<h1>BENEFITS OF VINYL</h1>\r\n<p>Grandura windows and doors are your entryway to elegance with their distinctive detailing and uncompromising quality that begins with the finest vinyl frames and sashes, premium components beautifully crafted and designed to provide optimum comfort, strength and energy efficiency.</p>\r\n<p><strong>INCREASED COMFORT</strong><br />\r\nOur high quality vinyl offers superior insulation for excellent thermal performance and year-round comfort.</p>\r\n<p><strong>EASY OPERATION</strong><br />\r\nImpeccable design incorporates premium components to ensure smoothoperation and consistent high performance.</p>\r\n<p><strong>WEAT HERABILITY</strong><br />\r\nHeavy duty solid vinyl lineals provide optimum strength and durability to withstand some of the toughest climates.</p>\r\n<p><strong>ENERGY EFFICIENCY</strong><br />\r\nVinyl&rsquo;s low thermal conductivity works in tandem with our advanced glass packages to provide greater energy efficiency.</p>\r\n<p><strong>LOW MAINTENANCE</strong><br />\r\nColor-through vinyl frames and sashes will never rot, peel, pit, flake or require painting.</p>\r\n<p><strong>VALUE</strong><br />\r\nGrandura has been specifically designed using the industry&rsquo;s most advanced technologies to help lower utility bills and increase the value of your home.</p>\r\n<p><img width=\"510\" height=\"261\" alt=\"\" src=\"/images/table_energyloss.gif\" /></p>',4),(322,'extended','','',4),(329,'body','Fckeditor','<p><img width=\"581\" height=\"192\" alt=\"\" src=\"/images/photo_home.jpg\" /></p>\r\n<h1>GLASS PACKAGES</h1>\r\n<p>Look past Grandura&rsquo;s beautiful, unobstructed views to find some of the industry&rsquo;s most advanced glass packages with energy-efficient features that ensure a cozy home and significantly reduced utility bills</p>\r\n<p>&nbsp;</p>',14),(330,'extended','','',14),(331,'body','Fckeditor','<p><img width=\"581\" height=\"192\" alt=\"\" src=\"/images/photo_home.jpg\" /></p>\r\n<h1>CONSIDERATIONS</h1>\r\n<p>Look past Grandura&rsquo;s beautiful, unobstructed views to find some of the industry&rsquo;s most advanced glass packages with energy-efficient features that ensure a cozy home and significantly reduced utility bills</p>\r\n<p>&nbsp;</p>',16),(332,'extended','','',16),(333,'body','Fckeditor','<p><img width=\"581\" height=\"192\" alt=\"\" src=\"/images/photo_home.jpg\" /></p>\r\n<h1>L0E-366</h1>\r\n<p>Look past Grandura&rsquo;s beautiful, unobstructed views to find some of the industry&rsquo;s most advanced glass packages with energy-efficient features that ensure a cozy home and significantly reduced utility bills</p>\r\n<p>&nbsp;</p>',15),(334,'extended','','',15),(335,'body','Fckeditor','<p><img width=\"581\" height=\"192\" alt=\"\" src=\"/images/photo_home.jpg\" /></p>\r\n<h1>GLASS PACKAGES</h1>\r\n<p>Look past Grandura&rsquo;s beautiful, unobstructed views to find some of the industry&rsquo;s most advanced glass packages with energy-efficient features that ensure a cozy home and significantly reduced utility bills</p>\r\n<p>&nbsp;</p>',17),(336,'extended','','',17),(341,'body','Fckeditor','<p><img width=\"581\" height=\"192\" alt=\"\" src=\"/images/photo_home.jpg\" /></p>\r\n<h1>OPTIONS & ACCESSORIES</h1>\r\n<p>Look past Grandura&rsquo;s beautiful, unobstructed views to find some of the industry&rsquo;s most advanced glass packages with energy-efficient features that ensure a cozy home and significantly reduced utility bills</p>\r\n<p>&nbsp;</p>',10),(342,'extended','','',10),(345,'body','Fckeditor','<p><img width=\"581\" height=\"192\" alt=\"\" src=\"/images/photo_home.jpg\" /></p>\r\n<h1>Specifications</h1>\r\n<p>Look past Grandura&rsquo;s beautiful, unobstructed views to find some of the industry&rsquo;s most advanced glass packages with energy-efficient features that ensure a cozy home and significantly reduced utility bills</p>\r\n<p>&nbsp;</p>',9),(346,'extended','','',9),(347,'body','Fckeditor','<p><img width=\"581\" height=\"192\" alt=\"\" src=\"/images/photo_home.jpg\" /></p>\r\n<h1>Awning / Hopper</h1>\r\n<p>Look past Grandura&rsquo;s beautiful, unobstructed views to find some of the industry&rsquo;s most advanced glass packages with energy-efficient features that ensure a cozy home and significantly reduced utility bills</p>\r\n<p>&nbsp;</p>',23),(348,'extended','','',23),(349,'body','Fckeditor','<p><img width=\"581\" height=\"192\" alt=\"\" src=\"/images/photo_home.jpg\" /></p>\r\n<h1>Bay / Bow</h1>\r\n<p>Look past Grandura&rsquo;s beautiful, unobstructed views to find some of the industry&rsquo;s most advanced glass packages with energy-efficient features that ensure a cozy home and significantly reduced utility bills</p>\r\n<p>&nbsp;</p>',25),(350,'extended','','',25),(351,'body','Fckeditor','<p><img width=\"581\" height=\"192\" alt=\"\" src=\"/images/photo_home.jpg\" /></p>\r\n<h1>Casement</h1>\r\n<p>Look past Grandura&rsquo;s beautiful, unobstructed views to find some of the industry&rsquo;s most advanced glass packages with energy-efficient features that ensure a cozy home and significantly reduced utility bills</p>\r\n<p>&nbsp;</p>',22),(352,'extended','','',22),(353,'body','Fckeditor','<p><img width=\"581\" height=\"192\" alt=\"\" src=\"/images/photo_home.jpg\" /></p>\r\n<h1>Double Hung</h1>\r\n<p>Look past Grandura&rsquo;s beautiful, unobstructed views to find some of the industry&rsquo;s most advanced glass packages with energy-efficient features that ensure a cozy home and significantly reduced utility bills</p>\r\n<p>&nbsp;</p>',20),(354,'extended','','',20),(355,'body','Fckeditor','<p><img width=\"581\" height=\"192\" alt=\"\" src=\"/images/photo_home.jpg\" /></p>\r\n<h1>Patio Door</h1>\r\n<p>Look past Grandura&rsquo;s beautiful, unobstructed views to find some of the industry&rsquo;s most advanced glass packages with energy-efficient features that ensure a cozy home and significantly reduced utility bills</p>\r\n<p>&nbsp;</p>',26),(356,'extended','','',26),(357,'body','Fckeditor','<p><img width=\"581\" height=\"192\" alt=\"\" src=\"/images/photo_home.jpg\" /></p>\r\n<h1>Picture / Geometric</h1>\r\n<p>Look past Grandura&rsquo;s beautiful, unobstructed views to find some of the industry&rsquo;s most advanced glass packages with energy-efficient features that ensure a cozy home and significantly reduced utility bills</p>\r\n<p>&nbsp;</p>',24),(358,'extended','','',24),(359,'body','Fckeditor','<p><img width=\"581\" height=\"192\" alt=\"\" src=\"/images/photo_home.jpg\" /></p>\r\n<h1>Sliders</h1>\r\n<p>Look past Grandura&rsquo;s beautiful, unobstructed views to find some of the industry&rsquo;s most advanced glass packages with energy-efficient features that ensure a cozy home and significantly reduced utility bills</p>\r\n<p>&nbsp;</p>',21),(360,'extended','','',21),(365,'body','Fckeditor','<p><img width=\"581\" height=\"192\" alt=\"\" src=\"/images/photo_home.jpg\" /></p>\r\n<h1>COLORS</h1>\r\n<p>Look past Grandura&rsquo;s beautiful, unobstructed views to find some of the industry&rsquo;s most advanced glass packages with energy-efficient features that ensure a cozy home and significantly reduced utility bills</p>\r\n<p>&nbsp;</p>',29),(366,'extended','','',29),(367,'body','Fckeditor','<p><img width=\"581\" height=\"192\" alt=\"\" src=\"/images/photo_home.jpg\" /></p>\r\n<h1>GLASS</h1>\r\n<p>Look past Grandura&rsquo;s beautiful, unobstructed views to find some of the industry&rsquo;s most advanced glass packages with energy-efficient features that ensure a cozy home and significantly reduced utility bills</p>\r\n<p>&nbsp;</p>',27),(368,'extended','','',27),(369,'body','Fckeditor','<p><img width=\"581\" height=\"192\" alt=\"\" src=\"/images/photo_home.jpg\" /></p>\r\n<h1>GRIDS & PATTERNS</h1>\r\n<p>Look past Grandura&rsquo;s beautiful, unobstructed views to find some of the industry&rsquo;s most advanced glass packages with energy-efficient features that ensure a cozy home and significantly reduced utility bills</p>\r\n<p>&nbsp;</p>',30),(370,'extended','','',30),(371,'body','Fckeditor','<p><img width=\"581\" height=\"192\" alt=\"\" src=\"/images/photo_home.jpg\" /></p>\r\n<h1>HARDWARE</h1>\r\n<p>Look past Grandura&rsquo;s beautiful, unobstructed views to find some of the industry&rsquo;s most advanced glass packages with energy-efficient features that ensure a cozy home and significantly reduced utility bills</p>\r\n<p>&nbsp;</p>',28),(372,'extended','','',28),(377,'body','','<p><img width=\"581\" height=\"192\" src=\"/images/photo_home.jpg\" alt=\"\" /></p>\r\n<h1>ENERGY SAVINGS CALCULATOR</h1>\r\n<p>Homeowners often replace their windows to save money on heating and cooling. However, not all windows perform the same. So how do you choose? Grandura windows are ENERGY STAR qualified and specifically designed to provide superior energy efficiency.</p>\r\n<p>To determine how much money you could save by installing energy efficient Grandura windows, simply use the tool below.</p>\r\n<p><strong>CALCULATE SAVINGS</strong><br />\r\nChoose your average monthly energy costs as well as your geographical region from the drop-down menu below and then click the &ldquo;Calculate Savings&rdquo; button. The estimated energy savings over a 10-year period will appear in the far right.</p>\r\n\r\n<p>\r\nChoose your average monthly energy costs and your geographical region from the \r\ndrop-down menu below then click the \"Calculate Savings\" button. The Estimated \r\nEnergy Savings over a 10-year period will appear to the far right. \r\n</p>\r\n\r\n<p>\r\n  <b>Avg Monthly Energy Costs:</b>\r\n  <select name=\"average_monthly_energy_cost\">\r\n    <option value=\"\">Cost</option>\r\n    <option value=\"50\">$50</option>\r\n    <option value=\"75\">$75</option>\r\n    <option value=\"100\">$100</option>\r\n    <option value=\"125\">$125</option>\r\n    <option value=\"150\">$150</option>\r\n    <option value=\"175\">$175</option>\r\n    <option value=\"200\">$200</option>\r\n    <option value=\"225\">$225</option>\r\n    <option value=\"250\">$250</option>\r\n    <option value=\"275\">$275</option>\r\n    <option value=\"300\">$300</option>  \r\n  </select>\r\n</p>\r\n\r\n<p>\r\n  <b>Region:</b>\r\n  <select name=\"region_percentage\">\r\n    <option value=\"\">Region</option>\r\n    <option value=\"90\">Northern</option>  \r\n    <option value=\"91\">North/Central</option>  \r\n    <option value=\"92\">South/Central</option>  \r\n    <option value=\"93\">Southern</option>  \r\n  </select>\r\n</p>\r\n\r\n<p>\r\n  <b>My Savings* (Over a 10-year period):</b>\r\n  <input type=\"text\" name=\"my_savings\" />\r\n</p>\r\n\r\n<p>\r\n  <input type=\"submit\" name=\"calculate\" value=\"Calculate Savings\" />\r\n</p>\r\n\r\n<p>\r\n  *The calculations used to determine the savings figure are as follows: \r\n  The yearly energy costs are calculated by multiplying the monthly cost by 12. \r\n  Then, since energy costs are estimated to increase by 5% each year, \r\n  5% of energy costs in year one is added to reach year two, \r\n  then 5% of year two is added to the year two cost to reach year three and so on until year 10. \r\n  Then, depending on your geographical region, \r\n  90%, 91%, 92% or 93% of that total will appear as your estimated energy savings over 10 years.\r\n</p>\r\n\r\n<r:snippet name=\"energy-saving-calculator-script\" />',19),(378,'extended','','',19),(395,'body','Fckeditor','<p><img width=\"580\" height=\"191\" alt=\"\" src=\"/images/overview/glass/header.jpg\" /></p>\r\n<h1>LIFETIME LIMITED WARRANTY</h1>\r\n<p>All replacement window/patio door vinyl components are backed by a Transferable Limited Lifetime Warranty</p>\r\n<div id=\"theContent\">\r\n<table width=\"500\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">\r\n    <tbody>\r\n        <tr>\r\n            <td width=\"220\" valign=\"top\"><img width=\"211\" height=\"321\" style=\"border:none;\" alt=\"\" src=\"/images/waranty.gif\" /></td>\r\n            <td valign=\"top\">\r\n            <p style=\"text-align:left;\">&nbsp;</p>\r\n            <p style=\"text-align:left;\"><strong>Lifetime Vinyl<br />\r\n            Lifetime Hardware<br />\r\n            Lifetime Insulating Glass Unit<br />\r\n            Lifetime Screen<br />\r\n            20-Year Accidental Glass Breakage</strong></p>\r\n            <p style=\"text-align:left;\"><a href=\"#\">Click image to view Warranty (in pdf format) <br />\r\n            For Viewing Purposes only, (Do not submit for any claim via web site. Use hardcopy warranty claim card for all claims). </a></p>\r\n            <p style=\"text-align:left;\">*For viewing purposes only. Use hard copy of warranty claim card for all claims. Do not submit any claims via website.</p>\r\n            </td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n</div>',18),(396,'extended','','',18),(397,'body','Fckeditor','<img src=\"/images/litterature/header.jpg\" width=\"581\" height=\"192\" />\r\n          <div id=\"theContent\">\r\n            <h1>LITTERATURE</h1>\r\n          <p>Grandura is pleased to provide electronic versions of our product literature. Simply click on the images below to view the files in PDF format.<br />\r\n            <a href=\"#\">Click images to view  (in PDF format)</a></p>\r\n          <table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n            <tr>\r\n              <td>\r\n              	<div class=\"img-t\"><img src=\"/images/litterature/t_brochure.jpg\" width=\"159\" height=\"160\" /></div>\r\n                <div class=\"txt-t\">Brochure</div>\r\n              </td>\r\n              <td>\r\n              	<div class=\"img-t\"><img src=\"/images/litterature/t_pam.jpg\" width=\"159\" height=\"160\" /></div>\r\n                <div class=\"txt-t\">Pamphlet</div>              \r\n              </td>\r\n              <td>&nbsp;</td>\r\n              <td>&nbsp;</td>\r\n            </tr>\r\n          </table></div></td>\r\n        </tr>\r\n      </table>',31),(398,'extended','','',31),(399,'body','Fckeditor','<p><img width=\"581\" height=\"192\" alt=\"\" src=\"/images/litterature/header.jpg\" /></p>\r\n<div id=\"theContent\">\r\n<h1>LITTERATURE</h1>\r\n<p>Grandura is pleased to provide electronic versions of our product literature. Simply click on the images below to view the files in PDF format.<br />\r\n<a href=\"#\">Click images to view  (in PDF format)</a></p>\r\n<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n    <tbody>\r\n        <tr>\r\n            <td>\r\n            <div class=\"img-t\"><img width=\"159\" height=\"160\" alt=\"\" src=\"/images/litterature/t_brochure.jpg\" /></div>\r\n            <div class=\"txt-t\">Brochure</div>\r\n            </td>\r\n            <td>\r\n            <div class=\"img-t\"><img width=\"159\" height=\"160\" alt=\"\" src=\"/images/litterature/t_pam.jpg\" /></div>\r\n            <div class=\"txt-t\">Pamphlet</div>\r\n            </td>\r\n            <td>&nbsp;</td>\r\n            <td>&nbsp;</td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n</div>',11),(400,'extended','','',11),(447,'body','','<img width=\"576\" height=\"193\" alt=\"\" src=\"/images/contact/header.jpg\" />\r\n<h1>AUTHORIZED DEALERS</h1>\r\n<p><r:dealer_location></r:dealer_location></p>\r\n<div class=\"clearFloat\">&nbsp;</div>',7),(448,'extended','','',7),(449,'mailer','','subject: \"New Contact Us Message\"\r\nfrom_field: email\r\nredirect_to: \"/contact-us/thank-you\"\r\nrecipients:\r\n  - info@granduraliving.com\r\n  - dungtn@gmail.com',7),(450,'email','','Name: <r:mailer:get name=\"name\"/>\r\nPhone: <r:mailer:get name=\"phone\"/>\r\nE-mail: <r:mailer:get name=\"email\"/>\r\nComments: <r:mailer:get name=\"comments\"/>\r\n',7),(457,'body','','Privacy Police',3),(458,'extended','','',3),(459,'body','','<img width=\"576\" height=\"193\" alt=\"\" src=\"/images/contact/header.jpg\" />\r\n<h1>THANK YOU</h1>\r\n<p>Your message has been sent.</p>',56),(460,'extended','','',56),(461,'no-map','','',56),(466,'body','','<h1>SITE MAP</h1>\r\n\r\n<div id=\"sidemenu\">\r\n <ul>\r\n   <r:find url=\"/\">\r\n     <r:snippet name=\"sitemap\" />\r\n   </r:find>\r\n </ul>\r\n</div>',2),(467,'extended','','',2),(480,'body','','    <div id=\"content\" style=\"padding-top:50px;\">\r\n      <table border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">\r\n        <tr>\r\n          <td valign=\"top\">&nbsp;</td>\r\n          <td valign=\"top\"><img src=\"/images/homebanner.gif\" width=\"430\" height=\"58\" /></td>\r\n        </tr>\r\n        <tr>\r\n          <td valign=\"top\"><div id=\"txthome\">\r\n            <img src=\"/images/bidulehome.gif\" width=\"101\" height=\"53\" />\r\n            <p>To create something truly exceptional you canâ€™t just focus on technology, you have to pay attention to beauty and thatâ€™s the spirit behind everything we create. The GranduraÂ® collection is designed to exceed your expectations because we understand that behind every Grandura product thereâ€™s you.</p>\r\n          </div>\r\n          <div style=\"float:left;margin-left:15px;margin-right:15px;\"><img src=\"/images/index_femme.jpg\" width=\"200\" height=\"320\" /></div></td>\r\n          <td width=\"430\" valign=\"top\"><object id=\"FlashID\" classid=\"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000\" width=\"430\" height=\"320\">\r\n            <param name=\"movie\" value=\"/flash/Homepage_Anim_FPO.swf\" />\r\n            <param name=\"quality\" value=\"high\" />\r\n            <param name=\"wmode\" value=\"opaque\" />\r\n            <param name=\"swfversion\" value=\"9.0.45.0\" />\r\n            <!-- This param tag prompts users with Flash Player 6.0 r65 and higher to download the latest version of Flash Player. Delete it if you donâ€™t want users to see the prompt. -->\r\n            <param name=\"expressinstall\" value=\"scripts/expressInstall.swf\" />\r\n            <!-- Next object tag is for non-IE browsers. So hide it from IE using IECC. -->\r\n            <!--[if !IE]>-->\r\n            <object type=\"application/x-shockwave-flash\" data=\"/flash/Homepage_Anim_FPO.swf\" width=\"430\" height=\"320\">\r\n              <!--<![endif]-->\r\n              <param name=\"quality\" value=\"high\" />\r\n              <param name=\"wmode\" value=\"opaque\" />\r\n              <param name=\"swfversion\" value=\"9.0.45.0\" />\r\n              <param name=\"expressinstall\" value=\"scripts/expressInstall.swf\" />\r\n              <!-- The browser displays the following alternative content for users with Flash Player 6.0 and older. -->\r\n              <div>\r\n                <h4>Content on this page requires a newer version of Adobe Flash Player.</h4>\r\n                <p><a href=\"http://www.adobe.com/go/getflashplayer\"><img src=\"http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif\" alt=\"Get Adobe Flash player\" width=\"112\" height=\"33\" /></a></p>\r\n              </div>\r\n              <!--[if !IE]>-->\r\n            </object>\r\n            <!--<![endif]-->\r\n          </object></td>\r\n        </tr>\r\n      </table>\r\n</div>',1),(481,'extended','','',1),(510,'body','Fckeditor','<p><img width=\"581\" height=\"192\" alt=\"\" src=\"/images/photo_home.jpg\" /></p>\r\n<h1>BENEFITS OF VINYL</h1>\r\n<p><span class=\"Apple-style-span\" style=\"font-family: \'Times New Roman\'; font-size: 16px; \"><b><span style=\"font-size: 11pt; \">Grandura&nbsp;</span></b><span style=\"font-size: 11pt; \">windows and doors are your entryway to elegance with their distinctive detailing and uncompromising quality that begins with the finest vinyl frames and sashes. These beautifully crafted premium components are designed to provide optimum comfort, strength and energy efficiency.</span></span></p>\r\n<p><span class=\"Apple-style-span\" style=\"font-family: \'Times New Roman\'; font-size: 16px; \"><span style=\"font-size: 11pt; \"><span class=\"Apple-style-span\" style=\"font-weight: bold; \">INCREASED COMFORT<br />\r\n</span></span></span><span style=\"font-size: 11pt; \">Our high quality vinyl offers superior insulation for excellent thermal performance and year-round comfort.<o:p></o:p></span><font class=\"Apple-style-span\" size=\"4\"><span class=\"Apple-style-span\" style=\"font-size: 15px;\"><b><br />\r\n</b></span></font></p>\r\n<p><span class=\"Apple-style-span\" style=\"font-family: Times; font-size: 16px; \"> </span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><b><span style=\"font-size: 11pt; \">EASY OPERATION</span></b><span style=\"font-size: 11pt; \"><o:p></o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><span style=\"font-size: 11pt; \">Designed with premium components to ensure smooth operation and consistent high performance.<o:p></o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><b><span style=\"font-size: 11pt; \"><o:p>&nbsp;</o:p></span></b></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><b><span style=\"font-size: 11pt; \">WEATHERABILITY</span></b><span style=\"font-size: 11pt; \"><o:p></o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><span style=\"font-size: 11pt; \">Heavy duty solid vinyl lineals provide optimum strength and durability to withstand some of the toughest climates.<o:p></o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><span style=\"font-size: 11pt; \"><o:p>&nbsp;</o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><b><span style=\"font-size: 11pt; \">ENERGY EFFICIENCY</span></b><span style=\"font-size: 11pt; \"><o:p></o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><span style=\"font-size: 11pt; \">Vinyl&rsquo;s low thermal conductivity works in tandem with our advanced glass packages to provide greater energy efficiency.<o:p></o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><span style=\"font-size: 11pt; \"><o:p>&nbsp;</o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><b><span style=\"font-size: 11pt; \">LOW MAINTENANCE</span></b><span style=\"font-size: 11pt; \"><o:p></o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><span style=\"font-size: 11pt; \">Color-through vinyl frames and sashes will never rot, peel, pit, flake or require painting.<o:p></o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><b><span style=\"font-size: 11pt; \"><o:p>&nbsp;</o:p></span></b></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><b><span style=\"font-size: 11pt; \">VALUE</span></b><span style=\"font-size: 11pt; \"><o:p></o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><b><span style=\"font-size: 11pt; \">Grandura&nbsp;</span></b><span style=\"font-size: 11pt; \">has been specifically designed using the industry&rsquo;s most advanced technologies to help lower utility bills and increase the value of your home.</span></p>\r\n\r\n<p>&nbsp;</p>\r\n<p><img width=\"510\" height=\"261\" alt=\"\" src=\"/images/table_energyloss.gif\" /></p>',12),(511,'extended','','',12),(512,'body','Fckeditor','<p><img height=\"192\" width=\"581\" alt=\"\" src=\"/images/photo_home.jpg\" /></p>\r\n<h1>PREMIUM FEATURES</h1>\r\n<p><span class=\"Apple-style-span\" style=\"font-family: \'Times New Roman\'; font-size: 15px; \">Careful consideration has gone into every exquisite detail of a&nbsp;<b>Grandura&nbsp;</b>window. Homeowners will appreciate its components and features, which culminate in a design offering superior strength, style and insulation.</span></p>\r\n<p>&nbsp;</p>',13),(513,'extended','','',13),(514,'body','Fckeditor','<p><img height=\"192\" width=\"581\" alt=\"\" src=\"/images/photo_home.jpg\" /></p>\r\n<h1>BENEFITS OF VINYL</h1>\r\n<p><span class=\"Apple-style-span\" style=\"font-family: \'Times New Roman\'; font-size: 16px; \"><b><span style=\"font-size: 11pt; \">Grandura&nbsp;</span></b><span style=\"font-size: 11pt; \">windows and doors are your entryway to elegance with their distinctive detailing and uncompromising quality that begins with the finest vinyl frames and sashes. These beautifully crafted premium components are designed to provide optimum comfort, strength and energy efficiency.</span></span></p>\r\n<p><span class=\"Apple-style-span\" style=\"font-family: \'Times New Roman\'; font-size: 16px; \"><span style=\"font-size: 11pt; \"><span class=\"Apple-style-span\" style=\"font-weight: bold; \">INCREASED COMFORT<br />\r\n</span></span></span><span style=\"font-size: 11pt; \">Our high quality vinyl offers superior insulation for excellent thermal performance and year-round comfort.<o:p></o:p></span><font class=\"Apple-style-span\" size=\"4\"><span class=\"Apple-style-span\" style=\"font-size: 15px;\"><b><br />\r\n</b></span></font></p>\r\n<p><span class=\"Apple-style-span\" style=\"font-family: Times; font-size: 16px; \"> </span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><b><span style=\"font-size: 11pt; \">EASY OPERATION</span></b><span style=\"font-size: 11pt; \"><o:p></o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><span style=\"font-size: 11pt; \">Designed with premium components to ensure smooth operation and consistent high performance.<o:p></o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><b><span style=\"font-size: 11pt; \"><o:p>&nbsp;</o:p></span></b></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><b><span style=\"font-size: 11pt; \">WEATHERABILITY</span></b><span style=\"font-size: 11pt; \"><o:p></o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><span style=\"font-size: 11pt; \">Heavy duty solid vinyl lineals provide optimum strength and durability to withstand some of the toughest climates.<o:p></o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><span style=\"font-size: 11pt; \"><o:p>&nbsp;</o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><b><span style=\"font-size: 11pt; \">ENERGY EFFICIENCY</span></b><span style=\"font-size: 11pt; \"><o:p></o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><span style=\"font-size: 11pt; \">Vinyl&rsquo;s low thermal conductivity works in tandem with our advanced glass packages to provide greater energy efficiency.<o:p></o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><span style=\"font-size: 11pt; \"><o:p>&nbsp;</o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><b><span style=\"font-size: 11pt; \">LOW MAINTENANCE</span></b><span style=\"font-size: 11pt; \"><o:p></o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><span style=\"font-size: 11pt; \">Color-through vinyl frames and sashes will never rot, peel, pit, flake or require painting.<o:p></o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><b><span style=\"font-size: 11pt; \"><o:p>&nbsp;</o:p></span></b></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><b><span style=\"font-size: 11pt; \">VALUE</span></b><span style=\"font-size: 11pt; \"><o:p></o:p></span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><b><span style=\"font-size: 11pt; \">Grandura&nbsp;</span></b><span style=\"font-size: 11pt; \">has been specifically designed using the industry&rsquo;s most advanced technologies to help lower utility bills and increase the value of your home.</span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \">&nbsp;</p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \"><img width=\"510\" height=\"261\" alt=\"\" src=\"/uploads/Image/table_energyloss.gif\" /><span style=\"font-size: 11pt; \"><br />\r\n</span></p>\r\n<p class=\"MsoNormal\" style=\"margin-top: 0cm; margin-right: 0cm; margin-bottom: 0.0001pt; margin-left: 0cm; font-size: 12pt; font-family: \'Times New Roman\'; \">&nbsp;</p>',8),(515,'extended','','',8);
+/*!40000 ALTER TABLE `page_parts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pages`
+--
+
+DROP TABLE IF EXISTS `pages`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `pages` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` varchar(255) default NULL,
+  `slug` varchar(100) default NULL,
+  `breadcrumb` varchar(160) default NULL,
+  `class_name` varchar(25) default NULL,
+  `status_id` int(11) NOT NULL default '1',
+  `parent_id` int(11) default NULL,
+  `layout_id` int(11) default NULL,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  `published_at` datetime default NULL,
+  `created_by_id` int(11) default NULL,
+  `updated_by_id` int(11) default NULL,
+  `virtual` tinyint(1) NOT NULL default '0',
+  `lock_version` int(11) default '0',
+  `description` varchar(255) default NULL,
+  `keywords` varchar(255) default NULL,
+  `base_gallery_id` int(11) default NULL,
+  `show_banner` tinyint(1) default '1',
+  `position` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `pages_class_name` (`class_name`),
+  KEY `pages_parent_id` (`parent_id`),
+  KEY `pages_child_slug` (`slug`,`parent_id`),
+  KEY `pages_published` (`virtual`,`status_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `pages`
+--
+
+LOCK TABLES `pages` WRITE;
+/*!40000 ALTER TABLE `pages` DISABLE KEYS */;
+INSERT INTO `pages` VALUES (1,'Home Page','/','Home Page','',100,NULL,3,'2009-03-25 10:41:06','2009-04-06 19:04:45','2009-03-25 17:41:23',1,3,0,19,'','',NULL,1,NULL),(2,'Site Map','site-map','Site Map','',100,1,2,'2009-03-26 03:40:53','2009-04-02 06:05:46','2009-03-26 10:41:10',1,1,0,8,'','',NULL,1,2),(3,'Privacy Policy','privacy-policy','Privacy Policy','',100,1,2,'2009-03-26 03:41:38','2009-04-02 04:56:47','2009-03-26 10:41:56',1,1,0,8,'','',NULL,1,1),(4,'Windows','windows','Windows','',100,1,2,'2009-03-26 11:44:15','2009-03-31 15:59:51','2009-03-26 11:44:15',1,2,0,8,'','',NULL,1,3),(5,'Siding','siding','Siding','',100,1,2,'2009-03-26 11:44:15','2009-03-27 14:01:00','2009-03-26 11:44:15',1,1,0,5,'','',NULL,1,4),(6,'Gallery','gallery','Gallery','',100,1,2,'2009-03-26 11:44:15','2009-03-27 14:01:00','2009-03-26 11:44:15',1,1,0,9,'','',NULL,1,5),(7,'Contact Us','contact-us','Contact Us','',100,1,4,'2009-03-26 11:44:15','2009-04-02 04:34:29','2009-03-26 11:44:15',1,1,0,24,'','',NULL,1,6),(8,'Overview','overview','Overview','',100,4,2,'2009-03-26 11:49:07','2009-04-06 19:58:34','2009-03-26 11:49:07',1,2,0,22,'','',NULL,1,1),(9,'Specifications','specifications','Specifications','',100,4,2,'2009-03-26 11:49:07','2009-03-31 16:17:37','2009-03-26 11:49:07',1,2,0,7,'','',NULL,1,2),(10,'Options & Accessories','options-and-accessories','Options & Accessories','',100,4,2,'2009-03-26 11:49:07','2009-03-31 16:14:40','2009-03-26 11:49:07',1,2,0,7,'','',NULL,1,3),(11,'Literature','literature','Literature','',100,4,2,'2009-03-26 11:49:07','2009-04-02 01:35:13','2009-03-26 11:49:07',1,2,0,8,'','',NULL,1,4),(12,'Vinyl Benefits','vinyl-benefits','Vinyl Benefits','',100,8,2,'2009-03-26 11:51:00','2009-04-06 19:42:43','2009-03-26 11:51:00',1,2,0,15,'','',NULL,1,1),(13,'Premium Features','premium-features','Premium Features','',100,8,2,'2009-03-26 11:51:00','2009-04-06 19:43:51','2009-03-26 11:51:00',1,2,0,9,'','',NULL,1,2),(14,'Glass','glass','Glass','',100,8,2,'2009-03-26 11:51:00','2009-04-01 15:12:51','2009-03-26 11:51:00',1,1,0,8,'','',NULL,1,3),(15,'LoE-366','loe-366','LoE-366','',100,14,2,'2009-03-26 11:52:34','2009-03-31 16:11:04','2009-03-26 11:52:34',1,2,0,3,'','',NULL,1,2),(16,'Considerations','considerations','Considerations','',100,14,2,'2009-03-26 11:52:34','2009-03-31 16:10:47','2009-03-26 11:52:34',1,2,0,3,'','',NULL,1,1),(17,'Packages','packages','Packages','',100,14,2,'2009-03-26 11:52:34','2009-03-31 16:11:18','2009-03-26 11:52:34',1,2,0,4,'','',NULL,1,3),(18,'Warranty','warranty','Warranty','',100,8,2,'2009-03-26 11:51:00','2009-04-02 01:33:04','2009-03-26 11:51:00',1,2,0,8,'','',NULL,1,4),(19,'Energy Savings Calculator ','energy-savings-calculator','Energy Savings Calculator','',100,8,2,'2009-03-26 11:51:00','2009-04-01 15:12:35','2009-03-26 11:51:00',1,1,0,16,'','',NULL,1,5),(20,'Double Hung','double-hung','Double Hung','',100,9,2,'2009-03-26 12:01:57','2009-04-01 15:25:21','2009-03-26 12:01:57',1,1,0,5,'','',NULL,1,1),(21,'Sliders','sliders','Sliders','',100,9,2,'2009-03-26 12:01:57','2009-04-01 15:25:21','2009-03-26 12:01:57',1,1,0,6,'','',NULL,1,2),(22,'Casement','casement','Casement','',100,9,2,'2009-03-26 12:01:57','2009-04-01 15:25:42','2009-03-26 12:01:57',1,1,0,7,'','',NULL,1,3),(23,'Awning / Hopper','awning-hopper','Awning / Hopper','',100,9,2,'2009-03-26 12:01:57','2009-04-01 15:25:42','2009-03-26 12:01:57',1,1,0,8,'','',NULL,1,4),(24,'Picture / Geometric','picture-geometric','Picture / Geometric','',100,9,2,'2009-03-26 12:01:57','2009-04-01 15:26:06','2009-03-26 12:01:57',1,1,0,6,'','',NULL,1,5),(25,'Bay / Bow','bay-bow','Bay / Bow','',100,9,2,'2009-03-26 12:01:57','2009-04-01 15:26:05','2009-03-26 12:01:57',1,1,0,7,'','',NULL,1,6),(26,'Patio Door','patio-door','Patio Door','',100,9,2,'2009-03-26 12:01:57','2009-04-01 15:25:56','2009-03-26 12:01:57',1,1,0,6,'','',NULL,1,7),(27,'Glass','glass','Glass','',100,10,2,'2009-03-26 12:08:15','2009-04-01 15:43:26','2009-03-26 12:08:15',1,2,0,3,'','',NULL,1,1),(28,'Hardware','hardware','Hardware','',100,10,2,'2009-03-26 12:08:15','2009-04-01 15:44:02','2009-03-26 12:08:15',1,2,0,4,'','',NULL,1,2),(29,'Colors','colors','Colors','',100,10,2,'2009-03-26 12:08:15','2009-04-01 15:44:10','2009-03-26 12:08:15',1,2,0,7,'','',NULL,1,4),(30,'Grids & Patterns','grids-and-patterns','Grids & Patterns','',100,10,2,'2009-03-26 12:08:15','2009-04-01 15:44:10','2009-03-26 12:08:15',1,2,0,7,'','',NULL,1,3),(31,'Brochures','brochures','Brochures','',100,11,2,'2009-03-26 12:09:25','2009-04-02 01:34:12','2009-03-26 12:09:25',1,2,0,3,'','',NULL,1,1),(32,'Overview','overview','Overview','',100,5,2,'2009-03-26 11:49:07','2009-03-27 14:01:53','2009-03-26 11:49:07',1,1,0,2,'','',NULL,1,1),(38,'Premium Features','premium-features','Premium Features','',100,32,2,'2009-03-26 11:51:00','2009-03-27 07:38:11','2009-03-26 11:51:00',1,NULL,0,4,'','',NULL,1,2),(39,'Vinyl Benefits','vinyl-benefits','Vinyl Benefits','',100,32,2,'2009-03-26 11:51:00','2009-04-01 15:28:26','2009-03-26 11:51:00',1,1,0,5,'','',NULL,1,1),(40,'Warranty','warranty','Warranty','',100,32,2,'2009-03-26 11:51:00','2009-03-27 07:38:11','2009-03-26 11:51:00',1,NULL,0,5,'','',NULL,1,3),(41,'Installation','installation','Installation','',100,32,2,'2009-03-26 11:51:00','2009-04-01 15:28:15','2009-03-26 11:51:00',1,1,0,9,'','',NULL,1,4),(42,'Literature','literature','Literature','',100,5,2,'2009-03-26 11:49:07','2009-03-27 14:02:03','2009-03-26 11:49:07',1,1,0,5,'','',NULL,1,3),(43,'Brochure','brochure','Brochure','',100,42,2,'2009-03-26 12:09:25','2009-03-27 07:38:11','2009-03-26 12:09:25',1,NULL,0,1,'','',NULL,1,1),(44,'Specifications','specifications','Specifications','',100,5,2,'2009-03-26 12:12:07','2009-03-27 14:02:03','2009-03-26 12:12:07',1,1,0,2,'','',NULL,1,2),(45,'D4','d4','D4','',100,44,2,'2009-03-26 12:12:49','2009-03-27 07:38:12','2009-03-26 12:12:49',1,NULL,0,1,'','',NULL,1,1),(46,'D4.5','d4.5','D4.5','',100,44,2,'2009-03-26 12:12:49','2009-03-27 07:38:12','2009-03-26 12:12:49',1,NULL,0,2,'','',NULL,1,2),(47,'Insulated','insulated','Insulated','',100,44,2,'2009-03-26 12:12:49','2009-03-27 07:38:12','2009-03-26 12:12:49',1,NULL,0,3,'','',NULL,1,3),(48,'Profile Specs','profile-specs','Profile Specs','',100,47,2,'2009-03-26 12:13:37','2009-04-01 15:28:59','2009-03-26 12:13:37',1,1,0,2,'','',NULL,1,1),(49,'Colors','colors','Colors','',100,47,2,'2009-03-26 12:13:37','2009-04-01 15:28:59','2009-03-26 12:13:37',1,1,0,3,'','',NULL,1,2),(50,'Glamour','glamour','Glamour','',100,6,2,'2009-03-26 12:14:25','2009-03-27 09:41:23','2009-03-26 12:14:25',1,1,0,4,'','',2,1,1),(51,'Windows','windows','Windows','',100,50,1,'2009-03-26 12:14:55','2009-04-01 15:45:22','2009-03-26 12:14:55',1,2,0,3,'','',2,1,1),(52,'Siding','siding','Siding','',100,50,1,'2009-03-26 12:14:55','2009-04-01 15:45:22','2009-03-26 12:14:55',1,2,0,4,'','',3,1,2),(56,'Thank You','thank-you','Thank You','',100,7,NULL,'2009-04-02 04:01:50','2009-04-02 05:53:47','2009-04-02 11:02:01',1,1,0,3,'','',NULL,1,1);
+/*!40000 ALTER TABLE `pages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `schema_migrations`
+--
+
+DROP TABLE IF EXISTS `schema_migrations`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `schema_migrations` (
+  `version` varchar(255) NOT NULL,
+  UNIQUE KEY `unique_schema_migrations` (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `schema_migrations`
+--
+
+LOCK TABLES `schema_migrations` WRITE;
+/*!40000 ALTER TABLE `schema_migrations` DISABLE KEYS */;
+INSERT INTO `schema_migrations` VALUES ('1'),('10'),('11'),('12'),('13'),('14'),('15'),('16'),('17'),('18'),('19'),('2'),('20'),('20081203140407'),('21'),('3'),('4'),('5'),('6'),('7'),('8'),('9'),('Banner Rotator-1'),('Dealer Location-1'),('Dealer Location-2'),('Dealer Location-3'),('Dealer Location-4'),('File Based Layout-1'),('Gallery-1'),('Gallery-10'),('Gallery-11'),('Gallery-12'),('Gallery-13'),('Gallery-14'),('Gallery-15'),('Gallery-16'),('Gallery-2'),('Gallery-3'),('Gallery-4'),('Gallery-5'),('Gallery-6'),('Gallery-7'),('Gallery-8'),('Gallery-9'),('Page Attachments-1'),('Page Attachments-2'),('Reorder-1');
+/*!40000 ALTER TABLE `schema_migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sessions`
+--
+
+DROP TABLE IF EXISTS `sessions`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `sessions` (
+  `id` int(11) NOT NULL auto_increment,
+  `session_id` varchar(255) default NULL,
+  `data` text,
+  `updated_at` datetime default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `index_sessions_on_session_id` (`session_id`),
+  KEY `index_sessions_on_updated_at` (`updated_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `sessions`
+--
+
+LOCK TABLES `sessions` WRITE;
+/*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `snippets`
+--
+
+DROP TABLE IF EXISTS `snippets`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `snippets` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(100) NOT NULL default '',
+  `filter_id` varchar(25) default NULL,
+  `content` text,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  `created_by_id` int(11) default NULL,
+  `updated_by_id` int(11) default NULL,
+  `lock_version` int(11) default '0',
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `snippets`
+--
+
+LOCK TABLES `snippets` WRITE;
+/*!40000 ALTER TABLE `snippets` DISABLE KEYS */;
+INSERT INTO `snippets` VALUES (1,'main-menu','','<div id=\"mainmenu\">\r\n  <a href=\"/windows\">windows</a> |\r\n  <a href=\"/siding\">siding</a> |\r\n  <a href=\"/gallery\">gallery</a> |\r\n  <a href=\"/contact-us\">contact us</a>\r\n</div>\r\n\r\n<script language=\"javascript\">\r\n  jQuery(\"#mainmenu a[href$=\" + location.pathname.split(\"/\")[1].toLowerCase() + \"]\").addClass(\"here\");\r\n</script>','2009-03-28 04:08:18','2009-04-01 10:07:24',1,1,7),(2,'side-menu','','<div id=\"sidemenu\">\r\n  <r:nav root=\"level-2\" depth=\"3\" />\r\n</div>','2009-03-28 04:32:06','2009-03-29 03:57:11',1,1,20),(3,'energy-saving-calculator-script','','<script language=\"javascript\">\r\n(function () {\r\n  var avgMonthlyEnergyCost = jQuery(\"select[name=average_monthly_energy_cost]\");\r\n  var regionPercentage = jQuery(\"select[name=region_percentage]\");\r\n  var mySavings = jQuery(\"input[name=my_savings]\");\r\n\r\n  function moneyRound(x) {\r\n    return Math.round(x * 100) / 100.0;\r\n  }\r\n  \r\n  function calculateEnergySaving() {\r\n    var cost = avgMonthlyEnergyCost.val();\r\n    var percentage = regionPercentage.val();\r\n    if (cost === \"\" || percentage === \"\") {\r\n      // Clear\r\n      mySavings.val(\"\");\r\n      return;\r\n    }\r\n    \r\n    // Convert float values \r\n    cost = parseInt(cost, 10);\r\n    percentage = parseFloat(percentage, 10) / 100.0;\r\n\r\n    var yearSaving = cost * 12;\r\n    var totalSaving = yearSaving;\r\n    \r\n    for (var i = 2; i <= 10; i++) {\r\n      yearSaving *= 1.05;\r\n      totalSaving += yearSaving;\r\n    }\r\n    \r\n    totalSaving *= percentage;\r\n    mySavings.val(\"$\" + moneyRound(totalSaving));\r\n  }\r\n  \r\n  // avgMonthlyEnergyCost.change(calculateEnergySaving);\r\n  // regionPercentage.change(calculateEnergySaving);\r\n  jQuery(\"input[name=calculate]\").click(calculateEnergySaving);\r\n  \r\n})();\r\n</script>','2009-04-01 03:03:16','2009-04-01 03:03:16',1,NULL,0),(4,'gallery-content','','<h1><r:title /></h1>\r\n\r\n<!-- galleries -->\r\n<r:gallery:if_galleries>\r\n  <div class=\"galleries\">\r\n    <r:galleries:each level=\"current\">\r\n      <div class=\"gallery\">    \r\n        <r:gallery:if_items>\r\n          <div class=\"thumb\" style=\"background-image: url(\'<r:gallery:item:thumb width=\"150\" prefix=\"small\" position=\"first\" />\');\">\r\n            <a href=\"<r:gallery:gallery_url />\" title=\"<r:gallery:name />\">\r\n              <r:gallery:name />\r\n            </a>                \r\n          </div>\r\n        </r:gallery:if_items>\r\n        <div class=\"description\">\r\n          <h2><r:gallery:link /></h2>\r\n          <p><r:gallery:description /></p>\r\n        </div>\r\n        <div class=\"clearer\"></div>\r\n      </div>\r\n    </r:galleries:each>\r\n  </div>\r\n</r:gallery:if_galleries>\r\n<!-- end galleries -->\r\n<r:gallery:unless_galleries>\r\n  <!-- items -->\r\n  <r:gallery:item:unless_current>\r\n    <r:gallery:if_items>\r\n      <div class=\"gallery\">            \r\n        <p><r:gallery:description /></p>\r\n        <r:gallery:items:each>\r\n          <!-- item -->\r\n          <div class=\"container\">\r\n            <div class=\"thumb\" style=\"background-image: url(\'<r:gallery:item:thumb width=\"150\" prefix=\"small\" />\')\">\r\n              <a href=\"<r:gallery:item:thumb width=\"450\" prefix=\"large\" />\" rel=\"lightbox[<r:gallery:name />]\" title=\"<r:gallery:item:name />\">\r\n                <r:gallery:item:name />\r\n               </a>\r\n            </div>\r\n          </div>                \r\n          <!-- end item -->\r\n        </r:gallery:items:each>\r\n        <div class=\"clearer\"></div>\r\n      </div>\r\n    </r:gallery:if_items>\r\n  </r:gallery:item:unless_current>\r\n  <!-- end items -->\r\n  <!-- item page -->\r\n  <r:gallery:item:if_current>\r\n    <r:gallery:item:current>\r\n      <div class=\"item\">  \r\n        <div class=\"navigation\">\r\n          <div class=\"prev\">\r\n            <r:gallery:item:if_prev>      \r\n              <a href=\"<r:gallery:item:prev_page_url />\">&laquo; prev</a>      \r\n            </r:gallery:item:if_prev>\r\n          </div>\r\n          <div class=\"next\">\r\n            <r:gallery:item:if_next>      \r\n              <a href=\"<r:gallery:item:next_page_url />\">next &raquo;</a>      \r\n            </r:gallery:item:if_next>\r\n          </div>\r\n          <div class=\"clearer\"></div>\r\n        </div>\r\n        <div class=\"clearer\"></div>\r\n        <h2><r:gallery:item:name /></h2>  \r\n        <div class=\"image\">\r\n          <a href=\"<r:gallery:item:path />\">\r\n            <img src=\"<r:gallery:item:thumb width=\"450\" prefix=\"large\" />\" alt=\"<r:gallery:item:name />\" />\r\n          </a>\r\n        </div>\r\n        <p>\r\n          <r:gallery:item:description />\r\n        </p>\r\n      </div>\r\n    </r:gallery:item:current>\r\n  </r:gallery:item:if_current>\r\n  <!-- end item page -->        \r\n</r:gallery:unless_galleries>\r\n','2009-04-01 09:40:07','2009-04-01 09:56:31',1,1,1),(5,'gallery-css','','<style type=\"text/css\" media=\"screen\">\r\n  /* Galleries list */\r\n  #container div.galleries div.gallery {\r\n  	border: 1px solid #999;\r\n  	padding: 10px;\r\n  	margin-bottom: 10px;\r\n  }\r\n\r\n  #content div.galleries div.gallery div.thumb {\r\n  	width: 120px;\r\n  	height: 120px;\r\n  	position: relative;\r\n  	float: left;\r\n  	background-color: transparent;\r\n  	background-repeat: no-repeat;\r\n  	background-position: center;\r\n  }\r\n\r\n  #content div.galleries div.gallery div.thumb a:link, #content div.galleries div.gallery div.thumb a:visited, #content div.galleries div.gallery div.thumb a:hover {\r\n    text-indent: -9999px;\r\n    background-color: transparent;\r\n    display: block;\r\n    height: 100%;\r\n    -moz-outline: none;\r\n  }\r\n\r\n  #content div.galleries div.gallery div.description {\r\n  	width: 360px;\r\n  	float: right;\r\n  }\r\n\r\n  #content div.galleries div.gallery div.description h2{\r\n  	margin: 0;\r\n  	font-size: 14px;\r\n  }\r\n  \r\n  /* Items list */\r\n  #content div.gallery div.container {\r\n  	float: left;\r\n  	width: 120px;\r\n  	height: 120px;\r\n  	margin: 0 10px 10px 0;\r\n  	border: 1px solid #999;\r\n  	position: relative;\r\n  }\r\n\r\n  #content div.gallery div.container div.thumb {\r\n  	background-repeat: no-repeat;\r\n  	background-position: center;\r\n  	background-color: #FFF;\r\n  	width: 100px;      \r\n  	height: 100px;\r\n  	position: absolute;\r\n  	top: 50%;\r\n  	left: 50%;\r\n  	margin-top: -50px;\r\n  	margin-left: -50px;		\r\n  	text-indent: -9999px;\r\n  }\r\n\r\n  #content div.gallery div.container div.thumb a {\r\n    background: transparent;\r\n    display: block;\r\n    height: 100%;	\r\n    -moz-outline: none;\r\n  }\r\n  \r\n  /* item page */\r\n\r\n  #content div.item h2 {\r\n  	font-size: 20px;\r\n  	margin-top: 0;\r\n  	text-align: center;\r\n  }\r\n\r\n  #content div.item div.navigation {\r\n  	border-bottom: 1px solid #999;\r\n  	padding-bottom: 10px;\r\n  	margin-bottom: 10px;\r\n  }\r\n\r\n  #content div.item div.navigation div.prev {\r\n  	float: left;\r\n  	text-align: right;\r\n  }\r\n\r\n  #content div.item div.navigation div.next {\r\n  	float: right;\r\n  	text-align: left;\r\n  }\r\n\r\n  #content div.item div.navigation div.prev, #content div.item div.navigation div.next {\r\n  	font-size: 20px;\r\n  	width: 49%;\r\n  }\r\n\r\n  #content div.item div.navigation div.prev a, #content div.item div.navigation div.next a  {\r\n  	display: block;\r\n  	padding: 0 10px;\r\n  }\r\n\r\n  #content div.item div.image {\r\n    text-align: center;\r\n  }\r\n\r\n  #content div.item div.image a img{\r\n  	border: none;\r\n  }\r\n</style>','2009-04-01 09:51:06','2009-04-01 09:51:06',1,NULL,0),(6,'sitemap','',' <r:children:each by=\"title\" order=\"asc\">\r\n   <r:unless_content part=\"no-map\">\r\n     <li>\r\n       <r:link />\r\n       <r:if_children>\r\n         <ul class=\"second\">\r\n           <r:snippet name=\"sitemap\" />\r\n         </ul>\r\n       </r:if_children>\r\n     </li>\r\n   </r:unless_content>\r\n </r:children:each>\r\n\r\n','2009-04-01 11:13:43','2009-04-02 05:50:08',1,1,2),(7,'contact-us-form','','<h1>CONTACT US</h1>\r\n<r:mailer:form name=\"contact\">\r\n<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"300\">\r\n  <tbody>\r\n    <tr>\r\n      <td valign=\"top\" width=\"75\"><p>Name :</p></td>\r\n      <td valign=\"top\"><r:text name=\"name\" /></td>\r\n    </tr>\r\n    <tr>\r\n      <td valign=\"top\" width=\"75\"><p>Phone :</p></td>\r\n      <td valign=\"top\"><r:text name=\"phone\" /></td>\r\n    </tr>\r\n    <tr>\r\n      <td valign=\"top\" width=\"75\"><p>Email :</p></td>\r\n      <td valign=\"top\"><r:text name=\"email\" /></td>\r\n    </tr>\r\n    <tr>\r\n      <td colspan=\"2\" height=\"20\" valign=\"top\"><p>Comments :</p></td>\r\n    </tr>\r\n    <tr>\r\n      <td colspan=\"2\" valign=\"top\"><r:mailer:textarea name=\"comments\" cols=\"45\" rows=\"8\" /></textarea></td>\r\n    </tr>\r\n    <tr>\r\n      <td colspan=\"2\" align=\"right\" valign=\"top\"><input name=\"button\" id=\"button\" value=\"Submit\" src=\"/images/contact/b_send.jpg\" style=\"border: medium none ; width: 76px;\" type=\"image\"></td>\r\n    </tr>\r\n  </tbody>\r\n</table>\r\n</r:mailer:form>','2009-04-02 03:37:27','2009-04-02 04:06:23',1,1,3),(8,'footer','','<div align=\"center\">\r\n  <a href=\"/\">Home</a> | \r\n  <a href=\"/windows\">Windows</a> | \r\n  <a href=\"/siding\">Siding</a> | \r\n  <a href=\"/gallery\">Gallery</a> | \r\n  <a href=\"/contact-us\">Contact Us</a> | \r\n  <a href=\"site-map\">Site Map</a> | \r\n  <a href=\"privacy-policy\">Privacy Policy</a>\r\n  <p class=\"copyright\" style=\"margin: 0px; padding-top: 5px;\">Â©2009 Grandura. All Rights Reserved</p>\r\n</div>\r\n','2009-04-02 03:41:28','2009-04-02 04:42:26',1,1,1);
+/*!40000 ALTER TABLE `snippets` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(100) default NULL,
+  `email` varchar(255) default NULL,
+  `login` varchar(40) NOT NULL default '',
+  `password` varchar(40) default NULL,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  `created_by_id` int(11) default NULL,
+  `updated_by_id` int(11) default NULL,
+  `admin` tinyint(1) NOT NULL default '0',
+  `developer` tinyint(1) NOT NULL default '0',
+  `notes` text,
+  `lock_version` int(11) default '0',
+  `salt` varchar(255) default NULL,
+  `session_token` varchar(255) default NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `login` (`login`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'admin',NULL,'admin','62c9a3ad5995634571479e9374f5c03fac1acdbc','2009-03-25 09:27:29','2009-03-25 10:13:20',NULL,NULL,1,0,NULL,3,'bbedf42263e044da43e516519b80e1225325e65d','9c097184eb7b5fd9a47a879e388761c76bbd9836'),(2,'Adami Trudel','a.trudel@emsolutions.ca','emsolutions','c2d5d8f9c89772a40acdad6983c79b46683074b5','2009-03-26 18:18:37','2009-03-28 11:19:02',1,NULL,1,0,'',1,'fa832fff716ea2377d1432ea38dfa0eed091d999','10aaf01fe9e7c56abd5447468f810b3619aaf147'),(3,'Mickael Legault','m.legault@emsolutions.ca','mickael','c11d14c935de984fc7cef8a2daaaaa994bccb7c0','2009-03-26 18:18:58','2009-04-06 18:53:07',1,2,1,0,'',1,'55500d7425187a93221028f9811b216937a27112',NULL),(5,'Alex Nguyen','dungtn@gmail.com','alex','9bd0c4082f06e334b2d0b9a1e7f8900074f1dd56','2009-04-02 09:03:17','2009-04-02 09:03:37',1,NULL,0,1,'',1,'a410c0ba6f55c201481e70a1379dd2cc93ab8176','95193af82f51547d2f48e064660f90ef58572b27'),(6,'Test User','info@emsolutions.ca','testuser','28758b3c49119569e3f085d6ed68d55142de9987','2009-04-06 19:59:26','2009-04-06 19:59:26',2,NULL,0,1,'',0,'a3be9537b1ca62e51edaa549020f358dad8af061',NULL);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2009-04-11  3:26:38

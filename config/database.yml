@@ -1,0 +1,14 @@
+development:
+  adapter: mysql
+  database: grandura_cms_development
+  username: root
+  password:
+  host: localhost
+
+
+production:
+  adapter: mysql
+  database: grandura_cms
+  username: grandura
+  password: gsladmin01
+  

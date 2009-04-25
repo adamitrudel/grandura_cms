@@ -1,0 +1,91 @@
+--------
+- TODO -
+--------
+ * Apply the silver theme for FCK editor http://www.fckeditor.net/demo/skins?skin=silver
+ * Install extension: reorder http://ext.radiantcms.org/extensions/4-reorder
+ * Install extension: file_based_layout http://ext.radiantcms.org/extensions/14-file-based-layout
+ * Rename page's slug to match with its title (Contact Us's slug now is windows-2-2-2)
+ * Install Navigation Tags extension
+ * Move main navigation (windows | siding | gallery | contact us) from normal layout to a snippet
+ * Side menu via Navigation Tags
+ * Customize Gallery Module and make it works
+ * Dealer model with create / edit / remove functions and link them to Radiant interface.
+ * Contact Us
+ * Add sitemap
+ * User Role (admin & regular)
+    + Admin can obviously do everything
+    + Regular:
+       - Can only see Pages, Galleries and Dealers (Main tabs)
+       - Cannot delete pages
+       - Can modify any pages
+       - Cannot change the Style of a page (Text) and could only use styles from the CSS (if possible)
+ >> CURRENTLY HERE <<
+ * Modified Gallery Module to show image name under image thumbnail
+
+
+----------------
+- INSTALLATION -
+----------------
+
+[ Navigation Tags ]
+git clone git://github.com/derencius/navigation_tags.git vendor/extensions/navigation_tags
+rake radiant:extensions:navigation_tags:migrate
+
+[ File-based Layout ]
+git clone git://github.com/RSpace/radiant-file_based_layout-extension.git vendor/extensions/file_based_layout
+rake radiant:extensions:file_based_layout:migrate
+
+[ Reorder ]
+git clone git://github.com/radiant/radiant-reorder-extension.git vendor/extensions/reorder
+rake radiant:extensions:reorder:migrate
+rake radiant:extensions:reorder:update
+
+[ Attachment Fu ]
+git clone git://github.com/technoweenie/attachment_fu.git vendor/plugins/attachment_fu
+
+[ Gallery ]
+git clone git://github.com/pilu/radiant-gallery.git vendor/extensions/gallery
+rake radiant:extensions:gallery:install
+
+
+[ Copy Move ]
+git://github.com/pilu/radiant-copy-move.git
+rake radiant:extensions:copy_move:install
+
+[ FCKeditor ]
+git clone git://github.com/djcp/radiant-fckeditor.git vendor/extensions/fckeditor
+cd vendor/extensions/fckeditor
+git branch --track fckeditor-0.7.1 origin/fckeditor-0.7.1
+git checkout fckeditor-0.7.1
+git pull
+cd ../../../
+rake radiant:extensions:fckeditor:update
+
+{ Following instruction below to make it work with Rails 2.2 (bleeding edge) }
+http://www.ruby-forum.com/topic/171833
+
+Open observer.js to replace:
+   putInEditor('part_' + partIndex + '_content');
+  } else {
+   removeEditor('part_' + partIndex + '_content');
+by
+		putInEditor(partIndex);
+	} else {
+		removeEditor(partIndex);
+
+
+[ Banner Rotator ]
+git clone git://github.com/seancribbs/radiant-banner-rotator-extension.git vendor/extensions/banner_rotator
+rake radiant:extensions:banner_rotator:migrate
+rake radiant:extensions:banner_rotator:update
+
+[ Page Attachments ]
+git clone git://github.com/radiant/radiant-page-attachments-extension.git vendor/extensions/page_attachments
+rake radiant:extensions:page_attachments:migrate
+rake radiant:extensions:page_attachments:update
+
+
+[ Bleeding Edge ]
+rake radiant:freeze:edge
+rake radiant:update
+rake db:migrate

@@ -1,0 +1,24 @@
+%h1 Locations
+
+%table.index
+  %thead
+    %tr
+      %th #
+      %th Location Name
+  %tbody
+    - @locations.each_with_index do |location, index|
+      %tr
+        %td= index + 1
+        %td
+          - form_for [:admin, location] do |f|
+            = f.text_field :name
+            = f.submit "Update"
+            = link_to image('remove', :alt => 'Remove Dealer'), admin_location_path(location), :confirm => 'Are you sure?', :method => :delete
+    %tr
+      %td
+      %td
+        - form_for [:admin, Location.new] do |f|
+          = f.text_field :name
+          = f.submit "Create"
+          
+= link_to "Back to Dealer", session[:back_to_dealer]

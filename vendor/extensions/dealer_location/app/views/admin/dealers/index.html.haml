@@ -1,0 +1,46 @@
+- content_for :page_css do
+  :sass
+    a.add-link
+      padding-left: 16px
+      background: url(/images/admin/plus.png) left center no-repeat
+
+%p{:style => 'float: right'}
+  = link_to 'New Dealer', new_admin_dealer_url, :class => 'add-link'
+
+%h1 Dealers
+
+- if @dealers.blank?
+  %p{:style => 'text-align: center'}
+    %em 
+      There are no dealer. Please 
+      = link_to "create a new one.", new_admin_dealer_url
+- else
+  - @dealers = @dealers.sort_by{ |dealer| dealer.location.to_s }
+  
+  %table.index
+    %thead
+      %tr
+        %th Location
+        %th Company
+        %th Contact Person
+        %th Phone
+        %th Address
+        %th Windows?
+        %th Siding?
+        %th Modify
+    %tbody
+      - @dealers.each do |dealer|
+        %tr
+          %td= dealer.location
+          %td= dealer.company
+          %td= dealer.contact_person
+          %td= dealer.phone
+          %td= dealer.address
+          %td= dealer.windows ? "Yes" : "No"
+          %td= dealer.siding ? "Yes" : "No"
+          %td
+            = link_to "Edit", edit_admin_dealer_path(dealer)
+            / |
+            / = link_to "Remove", remove_admin_dealer_path(dealer)
+            = link_to link_to image('remove', :alt => 'Remove Dealer'), remove_admin_dealer_path(dealer)
+      

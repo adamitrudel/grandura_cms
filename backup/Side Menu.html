@@ -1,0 +1,55 @@
+<div id="sidemenu">
+  <div class="menu-level-1" name="windows">
+    <div class="menu-level-2" name="overview">
+      <a class="menu-level-3" href="/windows/overview">OVERVIEW</a>
+      <ul>
+        <li><a href="/windows/overview/vinyl-benefits">Vinyl Benefits</a></li>
+        <li><a href="/windows/overview/premium-features">Premium Features</a></li>
+        <li><a href="/windows/overview/glass">Glass</a></li>
+        <li><a href="/windows/overview/warranty">Warranty</a></li>
+        <li><a href="/windows/overview/energy-savings-calculator">Energy Savings Calculator</a></li>
+      </ul>
+    </div>
+    <div class="menu-level-2" name="specifications">
+      <a class="menu-level-3" href="/windows/specifications">SPECIFICATIONS</a>
+      <ul>
+        <li><a href="/windows/specifications/double-hung">Double Hung</a></li>
+        <li><a href="/windows/specifications/sliders">Sliders</a></li>
+        <li><a href="/windows/specifications/casement">Casement</a></li>
+        <li><a href="/windows/specifications/awning-hopper">Awning / Hopper</a></li>
+        <li><a href="/windows/specifications/picture-geometric">Picture / Geometric</a></li>
+        <li><a href="/windows/specifications/bay-bow">Bay / Bow</a></li>
+        <li><a href="/windows/specifications/patio-door">Patio Door</a></li>
+      </ul>
+    </div>
+    <div class="menu-level-2" name="options-and-accessories">
+      <a class="menu-level-3" href="/windows/options-and-accessories">OPTIONS &amp; ACCESSORIES</a>
+      <ul>
+        <li><a href="/windows/options-and-accessories/glass">Glass</a></li>
+        <li><a href="/windows/options-and-accessories/hardware">Hardware</a></li>
+        <li><a href="/windows/options-and-accessories/grids-and-patterns">Grids &amp; Patterns</a></li>
+      </ul>
+    </div>
+    <div class="menu-level-2" name="literature">
+      <a class="menu-level-3" href="/windows/literature">LITERATURE</a>
+      <ul>
+        <li><a href="/windows/literature/brochure">Brochure</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script language="javascript">
+  var parts = location.pathname.toLowerCase().split("/");
+  $("#sidemenu .menu-level-1").hide();
+
+  var l1 = $("#sidemenu .menu-level-1[name$=" + parts[1] + "]");
+  l1.show();
+  $("ul", l1).hide();
+  
+  var l2 = $(".menu-level-2[name$=" + parts[2] + "]");
+  $("a.menu-level-3", l2).addClass("here");
+  $("ul", l2).show();
+
+  $("a[href$=" + parts[3] + "]", l2).addClass("here");
+</script>

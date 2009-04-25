@@ -1,0 +1,8 @@
+[Tuesday; October 9, 2007]
+
+Added 3 optional parameters; "root", "include_root" and "depth"
+- By default, root is still "/", otherwise you can use this to build sub-nav's
+- You can still include the root_page by setting include_root to true
+- Default depth is 1, which means no sub-ul's
+
+Thanks for the patch: Benny Degezelle
