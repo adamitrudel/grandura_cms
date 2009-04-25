@@ -9,7 +9,7 @@
 }
 
 #sidemenu li.parent_of_current > a {
-  color: #7ed0de;
+  color: #7ed0de; 
   font-weight: bold;
 }
 
@@ -94,7 +94,7 @@ img {border:0px;}
 
 .copyright {font-size:10px;} 
 
-.copyright_inner {font-size:8px;color:#654225;padding:10px;} 
+.copyright_inner {font-size:9px;color:#654225;padding:10px;} 
 
 /* side menu */
 
@@ -180,9 +180,16 @@ img {border:0px;}
 
 #theContent td {color:#654225;text-align:center;font-size:11px;font-family:"Times New Roman", Times, serif;} 
 
-.blueBox {background-color:#d9f1f5;padding:15px;margin-right:20px;margin-left:10px;}  
+.blueBox {background-color:#d9f1f5;padding:10px;margin-right:20px;margin-left:10px;}  
 
-.blueBox2 {background-color:#aedde7;padding:15px;}  
+.blueBox2 {background-color:#aedde7;padding:10px;}  
 
 .brownBox {background-color:#572e09;padding:5px;margin-right:20px;margin-left:10px;color:#fff;}
 
+.sideline {border-right-width:1px;border-right-color:#000;border-right-style:solid;width:1px;height:50px;float:left;padding-left:120px;margin-right:15px;}
+
+.smalltxt-title {font-size:10px;font-family:"Times New Roman", Times, serif;color:#654225;font-weight:bold;text-transform:uppercase;} 
+.smalltxt-title2 {font-size:10px;font-family:"Times New Roman", Times, serif;color:#654225;font-weight:bold;}   
+.smalltxt {font-size:9px;font-family:"Times New Roman", Times, serif;color:#654225;font-weight:bold;} 
+
+.smalltxt-title2_td {font-size:0.5em;font-family:"Times New Roman", Times, serif;color:#cbeaf0;font-weight:bold;text-transform:uppercase;text-align:center;}   
