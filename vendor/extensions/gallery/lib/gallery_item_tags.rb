@@ -116,7 +116,14 @@ module GalleryItemTags
     Provides description for current gallery item }
   tag "gallery:item:description" do |tag|  
     item = find_item(tag)
-    item.description
+    h item.description
+  end
+
+  tag "gallery:item:title" do |tag|  
+    item = find_item(tag)
+    name = item.name.titleize
+    desc = item.description.to_s.strip
+    "#{name.upcase}#{desc.blank? ? "" : ": <p>#{h desc}</p>"}"
   end
   
   desc %{

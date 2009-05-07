@@ -1,4 +1,4 @@
-<r:title />
+<r:content />
 <r:gallery:unless_galleries>
   <!-- items -->
   <r:gallery:item:unless_current>
@@ -8,9 +8,9 @@
         <r:gallery:items:each>
           <!-- item -->
           <td>
-            <a href="<r:gallery:item:thumb width="450" prefix="large" />" rel="lightbox[<r:gallery:name />]" title="<r:gallery:item:upcase_name />: <r:gallery:item:description />">
-            <div class="img-t"><img width="129" height="99" src="<r:gallery:item:thumb width="150" prefix="small" />"/></div>
-            <div class="txt-t"><r:gallery:item:short_name/></div>
+            <a href="<r:gallery:item:thumb width="450" prefix="large" />" rel="lightbox[<r:gallery:name />]" title="<r:gallery:item:title />">
+            <div class="img-t"><img width="129" height="167" src="<r:gallery:item:thumb width="150" prefix="small" />"/></div>
+            <div class="txt-t"><r:gallery:item:name/></div>
             </a>
           </td>
           <r:gallery:item:if_mod_4>
