@@ -172,11 +172,7 @@ img {border:0px;}
 #content_contact td h2 {margin:0px;padding:0px;padding-left:10px;}
 
 .txt-t {background-color:#654225;padding:5px;text-align:center;color:#aedde7;font-size:12px;margin-right:15px;margin-bottom:15px;}
-a.txt-t {text-decoration: none}
-a.txt-t:link {text-decoration: none}
-a.txt-t:visited {text-decoration: none}
-a.txt-t:active {text-decoration: none}
-a.txt-t:hover {text-decoration: none}
+a.gallery {text-decoration: none}
 
 .img-t {margin-right:15px;} 
 
