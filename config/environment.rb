@@ -55,7 +55,8 @@ Radiant::Initializer.run do |config|
   # Enable page/fragment caching by setting a file-based store
   # (remember to create the caching directory and make it readable to the application)
   # config.action_controller.fragment_cache_store = :file_store, "#{RAILS_ROOT}/fragment_cache"
-  config.action_controller.page_cache_directory = "#{RAILS_ROOT}/cache"
+  # config.action_controller.page_cache_directory = "#{RAILS_ROOT}/cache"
+  config.action_controller.page_cache_directory = nil
   
   # Activate observers that should always be running
   config.active_record.observers = :user_action_observer
