@@ -16,7 +16,8 @@ class GalleryItem < ActiveRecord::Base
   
   has_attachment :storage => :file_system,
     :path_prefix => Radiant::Config["gallery.path_prefix"],
-    :processor => Radiant::Config["gallery.processor"]      
+    :processor => Radiant::Config["gallery.processor"],
+    :thumbnails => { :thumb => "c130x100" }
   
   belongs_to :gallery
   
@@ -43,6 +44,9 @@ class GalleryItem < ActiveRecord::Base
   
   def thumb(options = {})
     if self.thumbnailable?
+      thumbnail = self.thumbnails.find_by_thumbnail(options[:prefix])
+      return thumbnail if thumbnail
+      
       prefix    = options[:prefix] ? "#{options[:prefix]}_" : ''    
       size      = proportional_resize(:max_width => options[:width], :max_height => options[:height])
       suffix    = "#{prefix}#{size[0]}x#{size[1]}"      
