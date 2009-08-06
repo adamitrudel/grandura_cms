@@ -54,22 +54,22 @@ module DealerLocation::Tags
   tag 'dealer_location' do |tag|
     r = %{
       <div id="content_contact">
+      <table width="100%" border="0" cellspacing="3" cellpadding="0">
     }
     
     r << Location.all.map{ |location|
       dealers = Dealer.find(:all, :conditions => { :location_id => location.id })
       dealers.blank? ? "" : %{
-        <table width="100%" border="0" cellspacing="3" cellpadding="0">
           <tr>
             <td colspan="4"><h2 class="citytxt">#{location.name}</h2></td>
           </tr>
           #{_dealers_html(dealers)}
-        </table>
-        <br />
+          <tr><br /></tr>
       }
     }.join
     
     r << %{
+      </table>
       </div>
     }
   end
