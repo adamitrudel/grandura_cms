@@ -64,7 +64,8 @@ module DealerLocation::Tags
             <td colspan="4"><h2 class="citytxt">#{location.name}</h2></td>
           </tr>
           #{_dealers_html(dealers)}
-          <tr><br /></tr>
+          <tr></tr>
+          <tr></tr>
       }
     }.join
     
