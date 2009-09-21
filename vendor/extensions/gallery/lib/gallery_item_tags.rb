@@ -123,7 +123,7 @@ module GalleryItemTags
     item = find_item(tag)
     name = item.name.titleize
     desc = item.description.to_s.strip
-    "#{name.upcase}#{desc.blank? ? "" : ": #{h desc}"}"
+    "#{name.upcase}#{desc.blank? ? "" : ": #{h desc.gsub('&amp;', '&').gsub('&#39;', "'")}"}"
   end
   
   desc %{
